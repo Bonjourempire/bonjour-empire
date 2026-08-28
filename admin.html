@@ -562,7 +562,144 @@
 
 
 </main>
+<!-- SUPABASE -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://ropbkswmihagfvhcfonb.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_gSMzK8B2ALsrkpNkAzWAaA_emr3j0GN";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+const bouton =
+    document.querySelector(
+        ".publish-button"
+    );
+
+
+bouton.addEventListener(
+    "click",
+    async function () {
+
+        const titre =
+            document.getElementById(
+                "titre"
+            ).value.trim();
+
+
+        const contenu =
+            document.getElementById(
+                "contenu"
+            ).value.trim();
+
+
+        const image_url =
+            document.getElementById(
+                "image_url"
+            ).value.trim();
+
+
+        /* Vérification */
+
+        if (!titre || !contenu) {
+
+            alert(
+                "⚠️ Veuillez remplir le titre et le contenu."
+            );
+
+            return;
+
+        }
+
+
+        /* Désactiver le bouton */
+
+        bouton.disabled = true;
+
+        bouton.innerHTML =
+            "⏳ Publication en cours...";
+
+
+        /* Envoi vers Supabase */
+
+        const { data, error } =
+            await supabaseClient
+                .from("publications")
+                .insert([
+                    {
+                        titre: titre,
+                        contenu: contenu,
+                        image_url:
+                            image_url || null
+                    }
+                ])
+                .select();
+
+
+        /* Gestion de l'erreur */
+
+        if (error) {
+
+            console.error(error);
+
+            alert(
+                "❌ Erreur : " +
+                error.message
+            );
+
+            bouton.disabled = false;
+
+            bouton.innerHTML =
+                '<i class="fa-solid fa-paper-plane"></i> Publier';
+
+            return;
+
+        }
+
+
+        /* Succès */
+
+        alert(
+            "🎉 Publication publiée avec succès !"
+        );
+
+
+        document.getElementById(
+            "titre"
+        ).value = "";
+
+
+        document.getElementById(
+            "contenu"
+        ).value = "";
+
+
+        document.getElementById(
+            "image_url"
+        ).value = "";
+
+
+        bouton.disabled = false;
+
+        bouton.innerHTML =
+            '<i class="fa-solid fa-paper-plane"></i> Publier';
+
+    }
+
+);
+
+</script>
 
 </body>
 
