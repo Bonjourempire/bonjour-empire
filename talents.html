@@ -602,4 +602,812 @@ nav a.active::after {
     color: #d79500;
 
 }
-  
+  /* ==============================
+   SECTION COMPLÉMENTAIRE
+============================== */
+
+.talent-message {
+
+    margin-top: 70px;
+
+    padding:
+        35px 40px;
+
+    border-radius: 18px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #061d3b,
+            #082d59
+        );
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.talent-message::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(244,169,0,0.14);
+
+    top: -110px;
+
+    left: -60px;
+
+}
+
+
+.talent-message i {
+
+    color: #f4a900;
+
+    font-size: 24px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.talent-message h3 {
+
+    color: #ffffff;
+
+    font-size: 19px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.talent-message p {
+
+    max-width: 700px;
+
+    margin: auto;
+
+    color: #c5d0df;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
+.talents-footer {
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #061d3b,
+            #082d59
+        );
+
+    color: #ffffff;
+
+    padding:
+        35px 7% 25px;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.talents-footer::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+
+    height: 220px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(244,169,0,0.12);
+
+    top: -150px;
+
+    right: -80px;
+
+}
+
+
+.talents-footer-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 900px;
+
+    margin: auto;
+
+}
+
+
+.talents-footer-title {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+
+}
+
+
+.talents-footer-title span {
+
+    color: #f4a900;
+
+}
+
+
+.talents-footer-text {
+
+    color: #aebbd0;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    margin-bottom: 18px;
+
+}
+
+
+.talents-footer-social {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.talents-footer-social a {
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 17px;
+
+    transition: 0.3s;
+
+}
+
+
+.talents-facebook {
+
+    background: #1877f2;
+
+}
+
+
+.talents-whatsapp {
+
+    background: #25d366;
+
+}
+
+
+.talents-tiktok {
+
+    background: #000000;
+
+}
+
+
+.talents-footer-social a:hover {
+
+    transform:
+        translateY(-4px);
+
+}
+
+
+.talents-copyright {
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    color: #8998ad;
+
+    font-size: 10px;
+
+}
+
+
+.talents-copyright strong {
+
+    color: #ffffff;
+
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 850px) {
+
+    header {
+
+        padding: 0 5%;
+
+    }
+
+
+    nav {
+
+        display: none;
+
+        position: absolute;
+
+        top: 82px;
+
+        left: 0;
+
+        width: 100%;
+
+        padding:
+            20px 5%;
+
+        background: #ffffff;
+
+        border-bottom:
+            1px solid #edf0f5;
+
+        box-shadow:
+            0 10px 25px
+            rgba(0,0,0,0.06);
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+
+    nav.active {
+
+        display: flex;
+
+    }
+
+
+    .menu-button {
+
+        display: block;
+
+    }
+
+
+    .talent-profile {
+
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+    }
+
+
+    .talent-photo {
+
+        max-width: 500px;
+
+        margin: auto;
+
+        width: 100%;
+
+    }
+
+
+    .talent-info {
+
+        text-align: center;
+
+    }
+
+
+    .talent-role {
+
+        justify-content: center;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .page-header {
+
+        padding:
+            60px 18px;
+
+    }
+
+
+    .talents-section {
+
+        padding:
+            60px 18px;
+
+    }
+
+
+    .talent-photo img {
+
+        height: 380px;
+
+    }
+
+
+    .talent-message {
+
+        padding:
+            28px 20px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==============================
+     HEADER
+============================== -->
+
+<header>
+
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <div class="logo-icon">
+
+            <img
+                src="logo.png"
+                alt="Logo Bonjour Empire"
+            >
+
+        </div>
+
+
+        <div class="logo-text">
+
+            <strong>
+                BONJOUR EMPIRE
+            </strong>
+
+            <span>
+                CULTURE • TALENTS • AVENIR
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <nav id="navigation">
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+
+        <a href="apropos.html">
+            À propos
+        </a>
+
+
+        <a
+            href="talents.html"
+            class="active"
+        >
+            Talents
+        </a>
+
+
+        <a href="opportunites.html">
+            Opportunités
+        </a>
+
+
+        <a href="evenements.html">
+            Événements
+        </a>
+
+    </nav>
+
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Ouvrir le menu"
+    >
+
+        <i class="fa-solid fa-bars"></i>
+
+    </button>
+
+</header>
+
+
+
+<!-- ==============================
+     CONTENU PRINCIPAL
+============================== -->
+
+<main>
+
+
+    <!-- EN-TÊTE -->
+
+    <section class="page-header">
+
+        <div class="page-label">
+
+            NOS TALENTS
+
+        </div>
+
+
+        <h1>
+
+            Des talents qui
+            <span>font la différence</span>
+
+        </h1>
+
+
+        <p>
+
+            Découvrez les personnalités et les acteurs
+            qui contribuent à la vision et au rayonnement
+            de Bonjour Empire.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- PROFIL -->
+
+    <section class="talents-section">
+
+
+        <div class="talent-profile">
+
+
+            <!-- PHOTO -->
+
+            <div class="talent-photo">
+
+                <div class="talent-photo-frame">
+
+                    <img
+                        src="coordonnateur.jpg"
+                        alt="El ben MOTINGEYA, coordonnateur de Bonjour Empire"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- INFORMATIONS -->
+
+            <div class="talent-info">
+
+
+                <div class="talent-role">
+
+                    <i
+                        class="fa-solid fa-star"
+                    ></i>
+
+                    COORDONNATEUR
+
+                </div>
+
+
+                <h2>
+
+                    El ben
+                    <span>MOTINGEYA</span>
+
+                </h2>
+
+
+                <p>
+
+                    Coordonnateur de Bonjour Empire,
+                    El ben MOTINGEYA participe à la
+                    coordination des initiatives et des
+                    activités de la structure.
+
+                </p>
+
+
+                <p>
+
+                    Son engagement contribue à créer un
+                    cadre favorable à l'expression des
+                    talents, à la créativité et à la
+                    participation des jeunes.
+
+                </p>
+
+
+                <div class="conference-badge">
+
+                    <i
+                        class="fa-solid fa-microphone"
+                    ></i>
+
+                    Présent lors de la conférence
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- MESSAGE -->
+
+        <div class="talent-message">
+
+
+            <i
+                class="fa-solid fa-users"
+            ></i>
+
+
+            <h3>
+
+                Valoriser celles et ceux qui font avancer
+                Bonjour Empire
+
+            </h3>
+
+
+            <p>
+
+                Bonjour Empire met en avant les personnes
+                qui contribuent à la réalisation de ses
+                initiatives et au développement des
+                opportunités pour la jeunesse.
+
+            </p>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+
+<footer class="talents-footer">
+
+    <div class="talents-footer-content">
+
+
+        <div class="talents-footer-title">
+
+            <span>Bonjour Empire</span>
+
+            — Culture • Talents • Avenir
+
+        </div>
+
+
+        <p class="talents-footer-text">
+
+            Promouvoir les talents, créer des opportunités
+            et construire l'avenir.
+
+        </p>
+
+
+        <!-- RÉSEAUX SOCIAUX -->
+
+        <div class="talents-footer-social">
+
+
+            <!-- FACEBOOK -->
+
+            <a
+                href="https://www.facebook.com/share/18iGoTPnW8/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="talents-facebook"
+                aria-label="Facebook"
+            >
+
+                <i
+                    class="fa-brands fa-facebook-f"
+                ></i>
+
+            </a>
+
+
+            <!-- WHATSAPP -->
+
+            <a
+                href="https://whatsapp.com/channel/0029VbDihXjGufJ1riPOAU2K"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="talents-whatsapp"
+                aria-label="WhatsApp"
+            >
+
+                <i
+                    class="fa-brands fa-whatsapp"
+                ></i>
+
+            </a>
+
+
+            <!-- TIKTOK -->
+
+            <a
+                href="https://www.tiktok.com/@bonjour.empire"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="talents-tiktok"
+                aria-label="TikTok"
+            >
+
+                <i
+                    class="fa-brands fa-tiktok"
+                ></i>
+
+            </a>
+
+
+        </div>
+
+
+        <div class="talents-copyright">
+
+            © 2026
+            <strong>Bonjour Empire</strong>.
+            Tous droits réservés.
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- ==============================
+     JAVASCRIPT
+============================== -->
+
+<script>
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const navigation =
+    document.getElementById("navigation");
+
+
+menuButton.addEventListener(
+    "click",
+    function () {
+
+        navigation.classList.toggle("active");
+
+    }
+);
+
+
+const navigationLinks =
+    document.querySelectorAll(
+        "#navigation a"
+    );
+
+
+navigationLinks.forEach(
+    function (link) {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                navigation.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
