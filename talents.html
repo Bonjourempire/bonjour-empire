@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Talents de Bonjour Empire — Découvrez les personnalités qui contribuent à la vision de Bonjour Empire."
+>
+
+<title>Bonjour Empire — Talents</title>
+
+
+<!-- POLICE -->
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+
+<!-- FONT AWESOME -->
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+
+<style>
+
+/* ==============================
+   RESET
+============================== */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    color: #172033;
+
+    background: #ffffff;
+
+    min-height: 100vh;
+
+}
+
+
+/* ==============================
+   HEADER
+============================== */
+
+header {
+
+    width: 100%;
+
+    height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: #ffffff;
+
+    border-bottom:
+        1px solid #edf0f5;
+
+    position: relative;
+
+    z-index: 1000;
+
+}
+
+
+/* ==============================
+   LOGO
+============================== */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+}
+
+
+.logo-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4a900,
+            #ffc94f
+        );
+
+    color: #06264d;
+
+    font-size: 21px;
+
+    overflow: hidden;
+
+}
+
+
+.logo-icon img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+}
+
+
+.logo-text strong {
+
+    display: block;
+
+    font-size: 18px;
+
+    color: #08264d;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+.logo-text span {
+
+    display: block;
+
+    font-size: 9px;
+
+    color: #d79500;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+
+    margin-top: 4px;
+
+}
+
+
+/* ==============================
+   NAVIGATION
+============================== */
+
+nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+nav a {
+
+    position: relative;
+
+    color: #4e596b;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+
+}
+
+
+nav a:hover {
+
+    color: #d79500;
+
+}
+
+
+nav a.active {
+
+    color: #d79500;
+
+}
+
+
+nav a.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -8px;
+
+    width: 100%;
+
+    height: 2px;
+
+    background: #d79500;
+
+}
+
+
+/* ==============================
+   MENU MOBILE
+============================== */
+
+.menu-button {
+
+    display: none;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 23px;
+
+    color: #08264d;
+
+    cursor: pointer;
+
+}
+
+
+/* ==============================
+   EN-TÊTE DE LA PAGE
+============================== */
+
+.page-header {
+
+    padding:
+        75px 20px 70px;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(244,169,0,0.14),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f7f9fc
+        );
+
+}
+
+
+.page-label {
+
+    display: inline-block;
+
+    padding:
+        8px 15px;
+
+    border-radius: 50px;
+
+    background: #fff8e7;
+
+    color: #b67800;
+
+    border:
+        1px solid #f5dfab;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.page-header h1 {
+
+    color: #101a2b;
+
+    font-size:
+        clamp(38px, 5vw, 60px);
+
+    line-height: 1.1;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.page-header h1 span {
+
+    color: #d79500;
+
+}
+
+
+.page-header p {
+
+    max-width: 700px;
+
+    margin: auto;
+
+    color: #687487;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ==============================
+   SECTION TALENT
+============================== */
+
+.talents-section {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding:
+        80px 7%;
+
+}
+
+
+.talent-profile {
+
+    display: grid;
+
+    grid-template-columns:
+        0.85fr 1.15fr;
+
+    gap: 60px;
+
+    align-items: center;
+
+}
+
+
+/* ==============================
+   PHOTO
+============================== */
+
+.talent-photo {
+
+    position: relative;
+
+}
+
+
+.talent-photo-frame {
+
+    padding: 10px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e9edf3;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 45px
+        rgba(20,35,60,0.10);
+
+}
+
+
+.talent-photo img {
+
+    width: 100%;
+
+    height: 430px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 14px;
+
+}
+
+
+/* PETIT ÉLÉMENT DÉCORATIF */
+
+.talent-photo::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 80px;
+
+    height: 80px;
+
+    border-radius: 50%;
+
+    background: #f4a900;
+
+    opacity: 0.15;
+
+    bottom: -25px;
+
+    right: -25px;
+
+    z-index: -1;
+
+}
+
+
+/* ==============================
+   INFORMATIONS
+============================== */
+
+.talent-info {
+
+    padding: 10px 0;
+
+}
+
+
+.talent-role {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #b67800;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.talent-role i {
+
+    font-size: 12px;
+
+}
+
+
+.talent-info h2 {
+
+    color: #101a2b;
+
+    font-size:
+        clamp(30px, 4vw, 46px);
+
+    line-height: 1.1;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.talent-info h2 span {
+
+    color: #d79500;
+
+}
+
+
+.talent-info p {
+
+    color: #697588;
+
+    font-size: 14px;
+
+    line-height: 1.9;
+
+    margin-bottom: 15px;
+
+}
+
+
+/* ==============================
+   BADGE CONFÉRENCE
+============================== */
+
+.conference-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 10px;
+
+    padding:
+        10px 15px;
+
+    border-radius: 8px;
+
+    background: #f7f9fc;
+
+    border:
+        1px solid #e9edf3;
+
+    color: #526075;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.conference-badge i {
+
+    color: #d79500;
+
+}
+  
