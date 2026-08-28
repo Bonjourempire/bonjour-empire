@@ -546,188 +546,183 @@ footer {
 
 <script>
 
-    const SUPABASE_URL =
-        "https://ropbkswmihagfvhcfonb.supabase.co";
+const SUPABASE_URL =
+    "https://ropbkswmihagfvhcfonb.supabase.co";
 
-    const SUPABASE_KEY =
-        "sb_publishable_gSMzK8B2ALsrkpNkAzWAaA_emr3j0GN";
+const SUPABASE_KEY =
+    "sb_publishable_gSMzK8B2ALsrkpNkAzWAaA_emr3j0GN";
 
 
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+async function chargerPublications() {
+
+    const container =
+        document.getElementById(
+            "publications-container"
         );
 
 
-    async function chargerPublications() {
+    container.innerHTML = `
+        <div class="chargement">
+            ⏳ Chargement...
+        </div>
+    `;
 
-        const container =
-            document.getElementById(
-                "publications-container"
+
+    const resultat =
+        await supabaseClient
+            .from("publications")
+            .select("id, titre, contenu, image_url, created_at")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
             );
 
 
-        const { data, error } =
-            await supabaseClient
-                .from("publications")
-                .select("*")
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                );
+    console.log("Résultat Supabase :", resultat);
 
 
-        if (error) {
+    if (resultat.error) {
 
-            console.error(
-                "Erreur Supabase :",
-                error
-            );
+        container.innerHTML = `
 
-            container.innerHTML = `
+            <div class="chargement">
 
-                <div class="chargement">
+                ❌ Erreur Supabase
 
-                    ❌ Impossible de charger
-                    les publications.
+                <br><br>
 
-                    <br><br>
+                ${resultat.error.message}
 
-                    Vérifiez la connexion
-                    à Supabase.
+            </div>
 
-                </div>
+        `;
 
-            `;
-
-            return;
-
-        }
+        return;
+    }
 
 
-        if (!data || data.length === 0) {
+    if (!resultat.data ||
+        resultat.data.length === 0) {
 
-            container.innerHTML = `
+        container.innerHTML = `
 
-                <div class="chargement">
+            <div class="chargement">
 
-                    Aucune publication
-                    pour le moment.
+                📭 Aucune publication
+                pour le moment.
 
-                </div>
+            </div>
 
-            `;
+        `;
 
-            return;
-
-        }
-
-
-        container.innerHTML = "";
+        return;
+    }
 
 
-        data.forEach(function (publication) {
+    container.innerHTML = "";
+
+
+    resultat.data.forEach(
+        function(publication) {
 
             const article =
                 document.createElement("article");
 
 
+            article.style.background =
+                "#ffffff";
+
+            article.style.padding =
+                "25px";
+
+            article.style.borderRadius =
+                "16px";
+
+            article.style.border =
+                "1px solid #e7ebf1";
+
+            article.style.boxShadow =
+                "0 8px 25px rgba(20,35,60,0.05)";
+
+
             article.innerHTML = `
 
-                <div
-                    style="
-                        background:#ffffff;
-                        border:1px solid #e7ebf1;
-                        border-radius:16px;
-                        padding:25px;
-                        box-shadow:0 8px 25px rgba(20,35,60,0.05);
-                    "
-                >
+                <small style="
+                    color:#b67800;
+                    font-weight:700;
+                ">
 
-                    <small
+                    ${new Date(
+                        publication.created_at
+                    ).toLocaleDateString(
+                        "fr-FR"
+                    )}
+
+                </small>
+
+
+                <h2 style="
+                    margin:10px 0;
+                    color:#152238;
+                    font-size:22px;
+                ">
+
+                    ${publication.titre}
+
+                </h2>
+
+
+                <p style="
+                    color:#657083;
+                    line-height:1.8;
+                    font-size:14px;
+                ">
+
+                    ${publication.contenu}
+
+                </p>
+
+
+                ${
+                    publication.image_url
+                    ?
+                    `
+                    <img
+                        src="${publication.image_url}"
+                        alt="${publication.titre}"
                         style="
-                            color:#b67800;
-                            font-weight:700;
-                        "
-                    >
-
-                        ${new Date(
-                            publication.created_at
-                        ).toLocaleDateString(
-                            "fr-FR"
-                        )}
-
-                    </small>
-
-
-                    <h2
-                        style="
-                            margin:10px 0;
-                            color:#152238;
-                            font-size:20px;
-                        "
-                    >
-
-                        ${publication.titre}
-
-                    </h2>
-
-
-                    <p
-                        style="
-                            color:#657083;
-                            line-height:1.8;
-                            font-size:14px;
-                        "
-                    >
-
-                        ${publication.contenu}
-
-                    </p>
-
-
-                    ${
-                        publication.image_url
-                        ?
-                        `
-                        <img
-                            src="${publication.image_url}"
-                            alt="${publication.titre}"
-                            style="
-                                width:100%;
-                                margin-top:18px;
-                                border-radius:12px;
-                                display:block;
-                            "
-                        >
-                        `
-                        :
-                        ""
-                    }
-
-
-                    <div
-                        style="
+                            width:100%;
                             margin-top:20px;
-                            padding-top:15px;
-                            border-top:1px solid #edf0f4;
-                            color:#7a8596;
-                            font-size:12px;
+                            border-radius:12px;
                         "
                     >
+                    `
+                    :
+                    ""
+                }
 
-                        ❤️ 0
-                        &nbsp;&nbsp;&nbsp;
 
-                        💬 0
-                        &nbsp;&nbsp;&nbsp;
+                <div style="
+                    margin-top:20px;
+                    padding-top:15px;
+                    border-top:1px solid #edf0f4;
+                    color:#7a8596;
+                ">
 
-                        ↗ Partager
-
-                    </div>
+                    ❤️ 0
+                    &nbsp;&nbsp;
+                    💬 0
+                    &nbsp;&nbsp;
+                    ↗ Partager
 
                 </div>
 
@@ -736,12 +731,13 @@ footer {
 
             container.appendChild(article);
 
-        });
+        }
+    );
 
-    }
+}
 
 
-    chargerPublications();
+chargerPublications();
 
 </script>
 <script>
