@@ -1005,7 +1005,204 @@ nav a.active::after {
     }
 
 }
+/* ==============================
+   ÉQUIPE
+============================== */
 
+.team-section {
+
+    margin-top: 80px;
+
+    padding-top: 70px;
+
+    border-top:
+        1px solid #edf0f4;
+
+}
+
+
+.team-heading {
+
+    text-align: center;
+
+    max-width: 700px;
+
+    margin:
+        0 auto 45px;
+
+}
+
+
+.team-heading h2 {
+
+    color: #101a2b;
+
+    font-size:
+        clamp(28px, 4vw, 42px);
+
+    line-height: 1.15;
+
+    letter-spacing: -1.2px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.team-heading h2 span {
+
+    color: #d79500;
+
+}
+
+
+.team-heading p {
+
+    color: #697588;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+.team-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.team-card {
+
+    position: relative;
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e8edf3;
+
+    border-radius: 15px;
+
+    transition: 0.3s;
+
+    overflow: hidden;
+
+}
+
+
+.team-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(20,35,60,0.08);
+
+    border-color: #f0d48d;
+
+}
+
+
+.team-card > i {
+
+    width: 55px;
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin:
+        0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #fff8e7;
+
+    color: #d79500;
+
+    font-size: 20px;
+
+}
+
+
+.team-card h3 {
+
+    color: #152238;
+
+    font-size: 15px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.team-card span {
+
+    color: #8994a5;
+
+    font-size: 10px;
+
+}
+
+
+.team-number {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 15px;
+
+    color: #d79500;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    opacity: 0.7;
+
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+    .team-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .team-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
 </style>
 
 </head>
