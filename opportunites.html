@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Opportunités Bonjour Empire — Formation, collaboration, projets, événements et valorisation des talents."
+>
+
+<title>Bonjour Empire — Opportunités</title>
+
+
+<!-- POLICE -->
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+
+<!-- ICONES -->
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+
+<style>
+
+/* ==============================
+   RESET
+============================== */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    color: #172033;
+
+    background: #ffffff;
+
+    min-height: 100vh;
+
+}
+
+
+/* ==============================
+   HEADER
+============================== */
+
+header {
+
+    width: 100%;
+
+    height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: #ffffff;
+
+    border-bottom:
+        1px solid #edf0f5;
+
+    position: relative;
+
+    z-index: 1000;
+
+}
+
+
+/* ==============================
+   LOGO
+============================== */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+}
+
+
+.logo-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4a900,
+            #ffc94f
+        );
+
+    overflow: hidden;
+
+}
+
+
+.logo-icon img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+}
+
+
+.logo-text strong {
+
+    display: block;
+
+    font-size: 18px;
+
+    color: #08264d;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+.logo-text span {
+
+    display: block;
+
+    font-size: 9px;
+
+    color: #d79500;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+
+    margin-top: 4px;
+
+}
+
+
+/* ==============================
+   NAVIGATION
+============================== */
+
+nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+nav a {
+
+    position: relative;
+
+    color: #4e596b;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.25s;
+
+}
+
+
+nav a:hover {
+
+    color: #d79500;
+
+}
+
+
+nav a.active {
+
+    color: #d79500;
+
+}
+
+
+nav a.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -8px;
+
+    width: 100%;
+
+    height: 2px;
+
+    background: #d79500;
+
+}
+
+
+/* ==============================
+   MENU MOBILE
+============================== */
+
+.menu-button {
+
+    display: none;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 23px;
+
+    color: #08264d;
+
+    cursor: pointer;
+
+}
+
+
+/* ==============================
+   EN-TÊTE DE PAGE
+============================== */
+
+.page-header {
+
+    padding:
+        75px 20px 70px;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(244,169,0,0.14),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f7f9fc
+        );
+
+}
+
+
+.page-label {
+
+    display: inline-block;
+
+    padding:
+        8px 15px;
+
+    border-radius: 50px;
+
+    background: #fff8e7;
+
+    color: #b67800;
+
+    border:
+        1px solid #f5dfab;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.page-header h1 {
+
+    color: #101a2b;
+
+    font-size:
+        clamp(38px, 5vw, 60px);
+
+    line-height: 1.1;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.page-header h1 span {
+
+    color: #d79500;
+
+}
+
+
+.page-header p {
+
+    max-width: 720px;
+
+    margin: auto;
+
+    color: #687487;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ==============================
+   SECTION OPPORTUNITÉS
+============================== */
+
+.opportunities-section {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding:
+        80px 7%;
+
+}
+
+
+.section-heading {
+
+    text-align: center;
+
+    max-width: 700px;
+
+    margin:
+        0 auto 45px;
+
+}
+
+
+.section-heading h2 {
+
+    color: #101a2b;
+
+    font-size:
+        clamp(28px, 4vw, 42px);
+
+    line-height: 1.15;
+
+    letter-spacing: -1.2px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.section-heading h2 span {
+
+    color: #d79500;
+
+}
+
+
+.section-heading p {
+
+    color: #697588;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ==============================
+   CARTES
+============================== */
+
+.opportunity-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.opportunity-card {
+
+    padding:
+        30px 24px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e8edf3;
+
+    border-radius: 16px;
+
+    transition: 0.3s;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.opportunity-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color: #f0d48d;
+
+    box-shadow:
+        0 18px 40px
+        rgba(20,35,60,0.08);
+
+}
+
+
+.opportunity-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #fff8e7;
+
+    color: #d79500;
+
+    font-size: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.opportunity-card h3 {
+
+    color: #152238;
+
+    font-size: 16px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.opportunity-card p {
+
+    color: #707d90;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ==============================
+   NUMÉROS DES CARTES
+============================== */
+
+.opportunity-number {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 20px;
+
+    color: #d79500;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    opacity: 0.7;
+
+}
+  /* ==============================
+   BLOC PARTICIPATION
+============================== */
+
+.participation {
+
+    margin-top: 70px;
+
+    padding:
+        45px 35px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #061d3b,
+            #082d59
+        );
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.participation::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+
+    height: 230px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(244,169,0,0.13);
+
+    top: -150px;
+
+    left: -80px;
+
+}
+
+
+.participation-content {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.participation i {
+
+    color: #f4a900;
+
+    font-size: 25px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.participation h2 {
+
+    color: #ffffff;
+
+    font-size:
+        clamp(25px, 4vw, 36px);
+
+    margin-bottom: 13px;
+
+}
+
+
+.participation p {
+
+    max-width: 700px;
+
+    margin:
+        0 auto 25px;
+
+    color: #c4cfde;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ==============================
+   BOUTON
+============================== */
+
+.participation-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    padding:
+        13px 23px;
+
+    background: #f4a900;
+
+    color: #08264d;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition: 0.3s;
+
+}
+
+
+.participation-button:hover {
+
+    background: #ffc94f;
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
+.opportunities-footer {
+
+    background:
+        linear-gradient(
+            135deg,
+            #061d3b,
+            #082d59
+        );
+
+    color: #ffffff;
+
+    padding:
+        35px 7% 25px;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.opportunities-footer::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+
+    height: 220px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(244,169,0,0.12);
+
+    top: -150px;
+
+    right: -80px;
+
+}
+
+
+.footer-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 900px;
+
+    margin: auto;
+
+}
+
+
+.footer-title {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+
+}
+
+
+.footer-title span {
+
+    color: #f4a900;
+
+}
+
+
+.footer-text {
+
+    color: #aebbd0;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    margin-bottom: 18px;
+
+}
+
+
+/* ==============================
+   RÉSEAUX SOCIAUX
+============================== */
+
+.footer-social {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.footer-social a {
+
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 17px;
+
+    transition: 0.3s;
+
+}
+
+
+.footer-facebook {
+
+    background: #1877f2;
+
+}
+
+
+.footer-whatsapp {
+
+    background: #25d366;
+
+}
+
+
+.footer-tiktok {
+
+    background: #000000;
+
+}
+
+
+.footer-social a:hover {
+
+    transform:
+        translateY(-4px);
+
+}
+
+
+.footer-copyright {
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    color: #8998ad;
+
+    font-size: 10px;
+
+}
+
+
+.footer-copyright strong {
+
+    color: #ffffff;
+
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 850px) {
+
+    header {
+
+        padding: 0 5%;
+
+    }
+
+
+    nav {
+
+        display: none;
+
+        position: absolute;
+
+        top: 82px;
+
+        left: 0;
+
+        width: 100%;
+
+        padding:
+            20px 5%;
+
+        background: #ffffff;
+
+        border-bottom:
+            1px solid #edf0f5;
+
+        box-shadow:
+            0 10px 25px
+            rgba(0,0,0,0.06);
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+
+    nav.active {
+
+        display: flex;
+
+    }
+
+
+    .menu-button {
+
+        display: block;
+
+    }
+
+
+    .opportunity-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .page-header {
+
+        padding:
+            60px 18px;
+
+    }
+
+
+    .opportunities-section {
+
+        padding:
+            60px 18px;
+
+    }
+
+
+    .opportunity-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .participation {
+
+        padding:
+            35px 20px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==============================
+     HEADER
+============================== -->
+
+<header>
+
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <div class="logo-icon">
+
+            <img
+                src="logo.png"
+                alt="Logo Bonjour Empire"
+            >
+
+        </div>
+
+
+        <div class="logo-text">
+
+            <strong>
+                BONJOUR EMPIRE
+            </strong>
+
+            <span>
+                CULTURE • TALENTS • AVENIR
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <nav id="navigation">
+
+
+        <a href="index.html">
+            Accueil
+        </a>
+
+
+        <a href="apropos.html">
+            À propos
+        </a>
+
+
+        <a href="talents.html">
+            Talents
+        </a>
+
+
+        <a
+            href="opportunites.html"
+            class="active"
+        >
+            Opportunités
+        </a>
+
+
+        <a href="evenements.html">
+            Événements
+        </a>
+
+
+    </nav>
+
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Ouvrir le menu"
+    >
+
+        <i class="fa-solid fa-bars"></i>
+
+    </button>
+
+</header>
+
+
+
+<!-- ==============================
+     CONTENU
+============================== -->
+
+<main>
+
+
+    <!-- EN-TÊTE -->
+
+    <section class="page-header">
+
+
+        <div class="page-label">
+
+            OPPORTUNITÉS
+
+        </div>
+
+
+        <h1>
+
+            Des possibilités pour
+            <span>aller plus loin</span>
+
+        </h1>
+
+
+        <p>
+
+            Découvrez les possibilités offertes par
+            Bonjour Empire pour apprendre, créer,
+            participer, collaborer et valoriser les talents.
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- OPPORTUNITÉS -->
+
+    <section class="opportunities-section">
+
+
+        <div class="section-heading">
+
+
+            <h2>
+
+                Nos principales
+                <span>opportunités</span>
+
+            </h2>
+
+
+            <p>
+
+                Nous encourageons les jeunes à développer
+                leurs talents, leurs idées et leurs projets
+                à travers différentes initiatives.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div class="opportunity-grid">
+
+
+            <!-- 01 -->
+
+            <div class="opportunity-card">
+
+                <div class="opportunity-number">
+                    01
+                </div>
+
+
+                <div class="opportunity-icon">
+
+                    <i
+                        class="fa-solid fa-palette"
+                    ></i>
+
+                </div>
+
+
+                <h3>
+
+                    Opportunités artistiques
+
+                </h3>
+
+
+                <p>
+
+                    Participez à des activités culturelles,
+                    artistiques, expositions et initiatives
+                    permettant de présenter votre créativité.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- 02 -->
+
+            <div class="opportunity-card">
+
+                <div class="opportunity-number">
+                    02
+                </div>
+
+
+                <div class="opportunity-icon">
+
+                    <i
+                        class="fa-solid fa-lightbulb"
+                    ></i>
+
+                </div>
+
+
+                <h3>
+
+                    Projets & initiatives
+
+                </h3>
+
+
+                <p>
+
+                    Proposez ou rejoignez des projets créatifs,
+                    culturels et sociaux portés par des jeunes
+                    et des acteurs engagés.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- 03 -->
+
+            <div class="opportunity-card">
+
+                <div class="opportunity-number">
+                    03
+                </div>
+
+
+                <div class="opportunity-icon">
+
+                    <i
+                        class="fa-solid fa-microphone"
+                    ></i>
+
+                </div>
+
+
+                <h3>
+
+                    Événements & rencontres
+
+                </h3>
+
+
+                <p>
+
+                    Prenez part à des conférences, ateliers,
+                    rencontres et événements organisés ou
+                    soutenus par Bonjour Empire.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- 04 -->
+
+            <div class="opportunity-card">
+
+                <div class="opportunity-number">
+                    04
+                </div>
+
+
+                <div class="opportunity-icon">
+
+                    <i
+                        class="fa-solid fa-graduation-cap"
+                    ></i>
+
+                </div>
+
+
+                <h3>
+
+                    Formation & développement
+
+                </h3>
+
+
+                <p>
+
+                    Découvrez des occasions d'apprendre,
+                    de développer vos compétences et
+                    d'enrichir votre expérience.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- 05 -->
+
+            <div class="opportunity-card">
+
+                <div class="opportunity-number">
+                    05
+                </div>
+
+
+                <div class="opportunity-icon">
+
+                    <i
+                        class="fa-solid fa-handshake"
+                    ></i>
+
+                </div>
+
+
+                <h3>
+
+                    Collaboration
+
+                </h3>
+
+
+                <p>
+
+                    Construisez des collaborations avec
+                    des artistes, créateurs, structures,
+                    partenaires et autres acteurs.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- 06 -->
+
+            <div class="opportunity-card">
+
+                <div class="opportunity-number">
+                    06
+                </div>
+
+
+                <div class="opportunity-icon">
+
+                    <i
+                        class="fa-solid fa-rocket"
+                    ></i>
+
+                </div>
+
+
+                <h3>
+
+                    Valorisation des talents
+
+                </h3>
+
+
+                <p>
+
+                    Faites connaître votre talent et vos
+                    initiatives à travers les activités,
+                    plateformes et réseaux de Bonjour Empire.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- APPEL À PARTICIPATION -->
+
+        <div class="participation">
+
+
+            <div class="participation-content">
+
+
+                <i
+                    class="fa-solid fa-star"
+                ></i>
+
+
+                <h2>
+
+                    Une opportunité vous intéresse ?
+
+                </h2>
+
+
+                <p>
+
+                    Restez connectés à Bonjour Empire
+                    pour découvrir nos prochains appels,
+                    programmes, activités et initiatives.
+
+                </p>
+
+
+                <a
+                    href="https://www.facebook.com/share/18iGoTPnW8/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="participation-button"
+                >
+
+                    Je veux participer
+
+                    <i
+                        class="fa-solid fa-arrow-right"
+                    ></i>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+
+<footer class="opportunities-footer">
+
+
+    <div class="footer-content">
+
+
+        <div class="footer-title">
+
+            <span>Bonjour Empire</span>
+
+            — Culture • Talents • Avenir
+
+        </div>
+
+
+        <p class="footer-text">
+
+            Promouvoir les talents, créer des opportunités
+            et construire l'avenir.
+
+        </p>
+
+
+
+        <div class="footer-social">
+
+
+            <!-- FACEBOOK -->
+
+            <a
+                href="https://www.facebook.com/share/18iGoTPnW8/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-facebook"
+                aria-label="Facebook"
+            >
+
+                <i
+                    class="fa-brands fa-facebook-f"
+                ></i>
+
+            </a>
+
+
+
+            <!-- WHATSAPP -->
+
+            <a
+                href="https://whatsapp.com/channel/0029VbDihXjGufJ1riPOAU2K"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-whatsapp"
+                aria-label="WhatsApp"
+            >
+
+                <i
+                    class="fa-brands fa-whatsapp"
+                ></i>
+
+            </a>
+
+
+
+            <!-- TIKTOK -->
+
+            <a
+                href="https://www.tiktok.com/@bonjour.empire"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-tiktok"
+                aria-label="TikTok"
+            >
+
+                <i
+                    class="fa-brands fa-tiktok"
+                ></i>
+
+            </a>
+
+
+        </div>
+
+
+
+        <div class="footer-copyright">
+
+            © 2026
+            <strong>Bonjour Empire</strong>.
+            Tous droits réservés.
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- ==============================
+     JAVASCRIPT
+============================== -->
+
+<script>
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const navigation =
+    document.getElementById("navigation");
+
+
+menuButton.addEventListener(
+    "click",
+    function () {
+
+        navigation.classList.toggle("active");
+
+    }
+);
+
+
+const navigationLinks =
+    document.querySelectorAll(
+        "#navigation a"
+    );
+
+
+navigationLinks.forEach(
+    function (link) {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                navigation.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
