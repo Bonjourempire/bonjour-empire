@@ -273,7 +273,14 @@ footer {
     line-height: 1.6;
 }
 
-
+.menu-button {
+    display: none;
+    border: none;
+    background: transparent;
+    color: #08264d;
+    font-size: 24px;
+    cursor: pointer;
+}
 /* ==============================
    TÉLÉPHONE
 ============================== */
@@ -287,7 +294,9 @@ footer {
     nav {
         display: none;
     }
-
+.menu-button {
+    display: block;
+}
     .page {
         padding: 50px 15px;
     }
@@ -734,7 +743,43 @@ footer {
     chargerPublications();
 
 </script>
+<script>
 
+function ouvrirMenu() {
+
+    const menu = document.querySelector("nav");
+
+    if (menu.style.display === "flex") {
+
+        menu.style.display = "none";
+
+    } else {
+
+        menu.style.display = "flex";
+
+        menu.style.position = "absolute";
+
+        menu.style.top = "70px";
+
+        menu.style.left = "0";
+
+        menu.style.width = "100%";
+
+        menu.style.flexDirection = "column";
+
+        menu.style.background = "#ffffff";
+
+        menu.style.padding = "20px";
+
+        menu.style.gap = "18px";
+
+        menu.style.boxShadow =
+            "0 10px 25px rgba(0,0,0,0.08)";
+    }
+
+}
+
+</script>
 </body>
 
 </html>
