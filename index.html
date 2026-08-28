@@ -1177,46 +1177,219 @@ nav a:hover::after {
     }
 
 }
-    /* ==============================
-   PUBLICITÉ ÉVÉNEMENT
+/* ==============================
+   PROCHAIN ÉVÉNEMENT
 ============================== */
 
-.pub-evenement {
+#prochain-evenement {
 
     width: 100%;
 
-    max-width: 850px;
+    max-width: 760px;
 
-    margin: 0 auto 35px;
+    margin: 0 auto 38px;
 
-    padding: 18px 22px;
+}
+
+
+.pub-evenement {
 
     display: flex;
 
     align-items: center;
 
-    gap: 16px;
+    gap: 18px;
+
+    padding: 13px 18px;
+
+    background: rgba(255,255,255,0.92);
+
+    border: 1px solid #e9edf3;
+
+    border-left: 4px solid #d79500;
+
+    border-radius: 10px;
 
     text-align: left;
 
-    background:
-        linear-gradient(
-            135deg,
-            #061d3b,
-            #082d59
-        );
+    box-shadow:
+        0 8px 25px
+        rgba(20,35,60,0.06);
 
-    border:
-        1px solid
-        rgba(244,169,0,0.35);
+}
 
-    border-radius: 14px;
+
+/* DATE */
+
+.pub-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    min-width: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #fff8e7;
+
+    color: #d79500;
+
+    font-size: 20px;
+
+}
+
+
+/* CONTENU */
+
+.pub-contenu {
+
+    flex: 1;
+
+}
+
+
+.pub-label {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #b67800;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.pub-contenu h3 {
+
+    color: #152238;
+
+    font-size: 14px;
+
+    margin-bottom: 3px;
+
+}
+
+
+.pub-contenu p {
+
+    color: #7a8596;
+
+    font-size: 10px;
+
+}
+
+
+/* BOUTON */
+
+.pub-bouton {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 9px 13px;
+
+    border: 1px solid #dce2ea;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #082d59;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    transition: 0.25s;
+
+}
+
+
+.pub-bouton:hover {
+
+    background: #082d59;
 
     color: #ffffff;
 
-    box-shadow:
-        0 15px 35px
-        rgba(8,45,89,0.15);
+    border-color: #082d59;
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    #prochain-evenement {
+
+        margin-bottom: 30px;
+
+    }
+
+
+    .pub-evenement {
+
+        gap: 10px;
+
+        padding: 11px;
+
+    }
+
+
+    .pub-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        min-width: 40px;
+
+        font-size: 16px;
+
+    }
+
+
+    .pub-contenu h3 {
+
+        font-size: 12px;
+
+    }
+
+
+    .pub-contenu p {
+
+        font-size: 9px;
+
+    }
+
+
+    .pub-bouton {
+
+        padding: 8px;
+
+        font-size: 8px;
+
+    }
 
 }
 </style>
