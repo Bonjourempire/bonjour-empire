@@ -360,6 +360,65 @@ footer {
     }
 
 }
+        /* ==============================
+   BOUTONS PUBLICATIONS - MOBILE
+============================== */
+
+.publication-actions {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.publication-actions button {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 8px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.publication-actions button:active {
+    transform: scale(0.97);
+}
+
+
+/* Téléphone */
+
+@media (max-width: 600px) {
+
+    .publication-actions {
+        gap: 6px;
+    }
+
+    .publication-actions button {
+        padding: 11px 5px;
+        font-size: 12px;
+    }
+
+}
+
+
+/* Très petit téléphone */
+
+@media (max-width: 380px) {
+
+    .publication-actions {
+        gap: 4px;
+    }
+
+    .publication-actions button {
+        padding: 10px 3px;
+        font-size: 11px;
+    }
+
+}
     </style>
 
 </head>
@@ -787,14 +846,11 @@ async function chargerPublications() {
     }
 
 
-    <div style="
-        margin-top:20px;
-        padding-top:18px;
-        border-top:1px solid #edf0f4;
-        display:flex;
-        gap:10px;
-        flex-wrap:wrap;
-    ">
+   <div class="publication-actions" style="
+    margin-top:20px;
+    padding-top:18px;
+    border-top:1px solid #edf0f4;
+">
 
         <button
             class="like-button"
