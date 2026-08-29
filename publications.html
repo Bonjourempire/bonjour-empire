@@ -611,35 +611,48 @@ async function chargerPublications() {
 
 
     if (!resultat.data ||
-        resultat.data.length === 0) {
+    resultat.data.length === 0) {
 
-        container.innerHTML = `
+    container.innerHTML = `
 
-            <div class="chargement">
+        <div class="chargement">
 
-                📭 Aucune publication
-                pour le moment.
+            📭 Aucune publication
+            pour le moment.
 
-            </div>
+        </div>
 
-        `;
+    `;
 
-        return;
-    }
+    return;
+}
+
+
 container.innerHTML = "";
 
+
 resultat.data.forEach(
-    function(publication) {
+    async function(publication) {
 
         const article =
             document.createElement("article");
 
-        article.style.background = "#ffffff";
-        article.style.padding = "25px";
-        article.style.borderRadius = "16px";
-        article.style.border = "1px solid #e7ebf1";
+
+        article.style.background =
+            "#ffffff";
+
+        article.style.padding =
+            "25px";
+
+        article.style.borderRadius =
+            "16px";
+
+        article.style.border =
+            "1px solid #e7ebf1";
+
         article.style.boxShadow =
             "0 8px 25px rgba(20,35,60,0.05)";
+
 
         article.innerHTML = `
 
@@ -647,42 +660,55 @@ resultat.data.forEach(
                 color:#b67800;
                 font-weight:700;
             ">
+
                 ${new Date(
                     publication.created_at
                 ).toLocaleDateString("fr-FR")}
+
             </small>
+
 
             <h2 style="
                 margin:10px 0;
                 color:#152238;
                 font-size:22px;
             ">
+
                 ${publication.titre}
+
             </h2>
+
 
             <p style="
                 color:#657083;
                 line-height:1.8;
                 font-size:14px;
             ">
+
                 ${publication.contenu}
+
             </p>
+
 
             ${
                 publication.image_url
-                ? `
-                    <img
-                        src="${publication.image_url}"
-                        alt="${publication.titre}"
-                        style="
-                            width:100%;
-                            margin-top:20px;
-                            border-radius:12px;
-                        "
-                    >
+                ?
                 `
-                : ""
+                <img
+                    src="${publication.image_url}"
+                    alt="${publication.titre}"
+                    style="
+                        width:100%;
+                        margin-top:20px;
+                        border-radius:12px;
+                        display:block;
+                    "
+                >
+                `
+                :
+                ""
             }
+
 
             <div style="
                 margin-top:20px;
@@ -690,11 +716,14 @@ resultat.data.forEach(
                 border-top:1px solid #edf0f4;
                 display:flex;
                 gap:10px;
+                flex-wrap:wrap;
             ">
+
+
+                <!-- LIKE -->
 
                 <button
                     class="like-button"
-                    data-id="${publication.id}"
                     style="
                         border:none;
                         background:#fff1f2;
@@ -705,8 +734,17 @@ resultat.data.forEach(
                         font-weight:700;
                     "
                 >
+
                     ❤️ J'aime
+
+                    <span class="like-count">
+                        0
+                    </span>
+
                 </button>
+
+
+                <!-- PARTAGE -->
 
                 <button
                     class="share-button"
@@ -720,21 +758,64 @@ resultat.data.forEach(
                         font-weight:700;
                     "
                 >
+
                     ↗️ Partager
+
+                    <span class="share-count">
+                        0
+                    </span>
+
                 </button>
 
+
             </div>
+
         `;
+
 
         container.appendChild(article);
 
 
-        /* LIKE */
+        /* =========================
+           COMPTEUR DES LIKES
+        ========================= */
+
+        const likeCount =
+            article.querySelector(
+                ".like-count"
+            );
+
+
+        const resultatLikes =
+            await supabaseClient
+                .from("publication_likes")
+                .select("*", {
+                    count: "exact",
+                    head: true
+                })
+                .eq(
+                    "publication_id",
+                    publication.id
+                );
+
+
+        if (!resultatLikes.error) {
+
+            likeCount.textContent =
+                resultatLikes.count || 0;
+
+        }
+
+
+        /* =========================
+           LIKE
+        ========================= */
 
         const likeButton =
             article.querySelector(
                 ".like-button"
             );
+
 
         likeButton.addEventListener(
             "click",
@@ -745,6 +826,7 @@ resultat.data.forEach(
                         "bonjour_empire_visitor"
                     );
 
+
                 if (!visitorId) {
 
                     visitorId =
@@ -754,7 +836,9 @@ resultat.data.forEach(
                         "bonjour_empire_visitor",
                         visitorId
                     );
+
                 }
+
 
                 const { data: dejaLike } =
                     await supabaseClient
@@ -770,6 +854,7 @@ resultat.data.forEach(
                         )
                         .maybeSingle();
 
+
                 if (dejaLike) {
 
                     alert(
@@ -777,17 +862,23 @@ resultat.data.forEach(
                     );
 
                     return;
+
                 }
+
 
                 const { error } =
                     await supabaseClient
                         .from("publication_likes")
                         .insert({
+
                             publication_id:
                                 publication.id,
+
                             visitor_id:
                                 visitorId
+
                         });
+
 
                 if (error) {
 
@@ -798,45 +889,111 @@ resultat.data.forEach(
                     );
 
                     return;
+
                 }
 
+
+                const { count: nouveauNombre } =
+                    await supabaseClient
+                        .from("publication_likes")
+                        .select("*", {
+                            count: "exact",
+                            head: true
+                        })
+                        .eq(
+                            "publication_id",
+                            publication.id
+                        );
+
+
+                likeCount.textContent =
+                    nouveauNombre || 0;
+
+
                 likeButton.innerHTML =
-                    "❤️ J'aime ✓";
+                    `❤️ J'aime
+                    <span class="like-count">
+                        ${nouveauNombre || 0}
+                    </span>`;
+
 
                 likeButton.style.background =
                     "#d6336c";
 
                 likeButton.style.color =
                     "#ffffff";
+
             }
         );
 
 
-        /* PARTAGE */
+        /* =========================
+           PARTAGE
+        ========================= */
 
         const shareButton =
             article.querySelector(
                 ".share-button"
             );
 
+
+        const shareCount =
+            article.querySelector(
+                ".share-count"
+            );
+
+
         shareButton.addEventListener(
             "click",
             async function() {
 
+                /* Compteur local */
+
+                let totalPartages =
+                    parseInt(
+                        localStorage.getItem(
+                            "partages_" +
+                            publication.id
+                        ) || "0"
+                    );
+
+
+                totalPartages++;
+
+
+                localStorage.setItem(
+                    "partages_" +
+                    publication.id,
+                    totalPartages
+                );
+
+
+                shareCount.textContent =
+                    totalPartages;
+
+
                 const url =
                     window.location.href;
 
-                if (navigator.share) {
+
+                if (
+                    navigator.share
+                ) {
 
                     try {
 
                         await navigator.share({
+
                             title:
                                 publication.titre,
+
                             text:
                                 publication.titre +
                                 " — Bonjour Empire",
-                            url: url
+
+                            url:
+                                url
+
                         });
 
                     } catch (error) {
@@ -861,7 +1018,7 @@ resultat.data.forEach(
                     } catch (error) {
 
                         alert(
-                            "🔗 Copiez le lien de la page pour la partager."
+                            "🔗 Copiez le lien de cette page pour le partager."
                         );
 
                     }
@@ -871,9 +1028,26 @@ resultat.data.forEach(
             }
         );
 
+
+        /* Restaurer le nombre de partages */
+
+        const anciensPartages =
+            localStorage.getItem(
+                "partages_" +
+                publication.id
+            );
+
+
+        if (anciensPartages) {
+
+            shareCount.textContent =
+                anciensPartages;
+
+        }
+
     }
 );
-}    
+}
 chargerPublications();
 
 </script>
