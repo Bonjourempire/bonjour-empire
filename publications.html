@@ -737,185 +737,122 @@ async function chargerPublications() {
             "0 8px 25px rgba(20,35,60,0.05)";
 
 
-        article.innerHTML = `
+       article.innerHTML = `
 
-            <small style="
-                color:#b67800;
+    <small style="
+        color:#b67800;
+        font-weight:700;
+    ">
+        ${new Date(
+            publication.created_at
+        ).toLocaleDateString("fr-FR")}
+    </small>
+
+
+    <h2 style="
+        margin:10px 0;
+        color:#152238;
+        font-size:22px;
+    ">
+        ${publication.titre}
+    </h2>
+
+
+    <p style="
+        color:#657083;
+        line-height:1.8;
+        font-size:14px;
+    ">
+        ${publication.contenu}
+    </p>
+
+
+    ${
+        publication.image_url
+        ?
+        `
+            <img
+                src="${publication.image_url}"
+                alt="${publication.titre}"
+                style="
+                    width:100%;
+                    margin-top:20px;
+                    border-radius:12px;
+                    display:block;
+                "
+            >
+        `
+        :
+        ""
+    }
+
+
+    <div style="
+        margin-top:20px;
+        padding-top:18px;
+        border-top:1px solid #edf0f4;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+    ">
+
+        <button
+            class="like-button"
+            style="
+                border:none;
+                padding:10px 15px;
+                border-radius:8px;
+                cursor:pointer;
                 font-weight:700;
-            ">
-
-                ${new Date(
-                    publication.created_at
-                ).toLocaleDateString("fr-FR")}
-
-            </small>
-
-
-            <h2 style="
-                margin:10px 0;
-                color:#152238;
-                font-size:22px;
-            ">
-
-                ${publication.titre}
-
-            </h2>
+                background:#fff1f2;
+                color:#d6336c;
+            "
+        >
+            ❤️ J'aime
+            <span class="like-count">
+                ${nombreLikes}
+            </span>
+        </button>
 
 
-            <p style="
-                color:#657083;
-                line-height:1.8;
-                font-size:14px;
-            ">
-
-                ${publication.contenu}
-
-            </p>
-
-
-            ${
-                publication.image_url
-                ?
-                `
-                    <img
-                        src="${publication.image_url}"
-                        alt="${publication.titre}"
-                        style="
-                            width:100%;
-                            margin-top:20px;
-                            border-radius:12px;
-                            display:block;
-                        "
-                    >
-                `
-                :
-                ""
-            }
-<div style="
-                margin-top:20px;
-                padding-top:18px;
-                border-top:1px solid #edf0f4;
-                display:flex;
-                gap:10px;
-                flex-wrap:wrap;
-            ">
-
-                <button
-                    class="like-button"
-                    style="
-                        border:none;
-                        padding:10px 15px;
-                        border-radius:8px;
-                        cursor:pointer;
-                        font-weight:700;
-                        background:#fff1f2;
-                        color:#d6336c;
-                    "
-                >
-                    ❤️ J'aime
-                    <span class="like-count">
-                        ${nombreLikes}
-                    </span>
-                </button>
+        <button
+            class="comment-button"
+            style="
+                border:none;
+                padding:10px 15px;
+                border-radius:8px;
+                cursor:pointer;
+                font-weight:700;
+                background:#f3f4f6;
+                color:#374151;
+            "
+        >
+            💬 Commenter
+            <span class="comment-count">
+                0
+            </span>
+        </button>
 
 
-                <button
-                    class="comment-button"
-                    style="
-                        border:none;
-                        padding:10px 15px;
-                        border-radius:8px;
-                        cursor:pointer;
-                        font-weight:700;
-                        background:#f3f4f6;
-                        color:#374151;
-                    "
-                >
-                    💬 Commenter
-                    <span class="comment-count">
-                        0
-                    </span>
-                </button>
+        <button
+            class="share-button"
+            style="
+                border:none;
+                padding:10px 15px;
+                border-radius:8px;
+                cursor:pointer;
+                font-weight:700;
+                background:#eef5ff;
+                color:#082d59;
+            "
+        >
+            ↗️ Partager
+        </button>
 
+    </div>
 
-                <button
-                    class="share-button"
-                    style="
-                        border:none;
-                        padding:10px 15px;
-                        border-radius:8px;
-                        cursor:pointer;
-                        font-weight:700;
-                        background:#eef5ff;
-                        color:#082d59;
-                    "
-                >
-                    ↗️ Partager
-                </button>
-
-            </div>
-
-        `;
-
-            <div style="
-                margin-top:20px;
-                padding-top:18px;
-                border-top:1px solid #edf0f4;
-                display:flex;
-                gap:10px;
-                flex-wrap:wrap;
-            ">
-
-
-                <button
-                    class="like-button"
-                    style="
-                        border:none;
-                        padding:10px 15px;
-                        border-radius:8px;
-                        cursor:pointer;
-                        font-weight:700;
-
-                        ${
-                            dejaLike
-                            ?
-                            "background:#d6336c;color:#ffffff;"
-                            :
-                            "background:#fff1f2;color:#d6336c;"
-                        }
-                    "
-                >
-
-                    ❤️ J'aime
-                    <span class="like-count">
-                        ${nombreLikes}
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="share-button"
-                    style="
-                        border:none;
-                        background:#eef5ff;
-                        color:#082d59;
-                        padding:10px 15px;
-                        border-radius:8px;
-                        cursor:pointer;
-                        font-weight:700;
-                    "
-                >
-
-                    ↗️ Partager
-
-                </button>
-
-            </div>
-
-        `;
-
-
+`;
+           
         container.appendChild(article);
 
 
