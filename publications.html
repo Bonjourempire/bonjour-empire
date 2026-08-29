@@ -795,16 +795,21 @@ resultat.data.forEach(
         ================================= */
 
         const resultatLikes =
-            await supabaseClient
-                .from("publication_likes")
-                .select("*", {
-                    count: "exact",
-                    head: true
-                })
-                .eq(
-                    "publication_id",
-                    publication.id
-                );
+    await supabaseClient
+        .from("publication_likes")
+        .select("id")
+        .eq(
+            "publication_id",
+            publication.id
+        );
+
+const totalLikes =
+    resultatLikes.data
+        ? resultatLikes.data.length
+        : 0;
+
+likeCount.textContent =
+    totalLikes;
 
 
         if (!resultatLikes.error) {
@@ -916,13 +921,22 @@ resultat.data.forEach(
 
                 /* Nouveau nombre */
 
-                const nouveau =
-                    await supabaseClient
-                        .from("publication_likes")
-                        .select("*", {
-                            count: "exact",
-                            head: true
-                        })
+               const nouveau =
+    await supabaseClient
+        .from("publication_likes")
+        .select("id")
+        .eq(
+            "publication_id",
+            publication.id
+        );
+
+const nouveauNombre =
+    nouveau.data
+        ? nouveau.data.length
+        : 0;
+
+likeCount.textContent =
+    nouveauNombre;
                         .eq(
                             "publication_id",
                             publication.id
