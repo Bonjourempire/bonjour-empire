@@ -552,7 +552,6 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_gSMzK8B2ALsrkpNkAzWAaA_emr3j0GN";
 
-
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
@@ -567,7 +566,6 @@ async function chargerPublications() {
             "publications-container"
         );
 
-
     container.innerHTML = `
         <div class="chargement">
             ⏳ Chargement...
@@ -575,185 +573,15 @@ async function chargerPublications() {
     `;
 
 
-    const resultat =
-        await supabaseClient
-            .from("publications")
-            .select("id, titre, contenu, image_url, created_at")
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-    console.log("Résultat Supabase :", resultat);
-
-
-    if (resultat.error) {
-
-        container.innerHTML = `
-
-            <div class="chargement">
-
-                ❌ Erreur Supabase
-
-                <br><br>
-
-                ${resultat.error.message}
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-if (!resultat.data ||
-    resultat.data.length === 0) {
-
-    container.innerHTML = `
-        <div class="chargement">
-            📭 Aucune publication pour le moment.
-        </div>
-    `;
-
-    return;
-}
-
-container.innerHTML = "";
-
-for (const publication of resultat.data) {
-
-    const article = document.createElement("article");
-
-    article.style.background = "#ffffff";
-    article.style.padding = "25px";
-    article.style.borderRadius = "16px";
-    article.style.border = "1px solid #e7ebf1";
-    article.style.boxShadow =
-        "0 8px 25px rgba(20,35,60,0.05)";
-    article.style.marginBottom = "20px";
-
-    /* RÉCUPÉRER LES LIKES */
-
-    const likesResult = await supabaseClient
-        .from("publication_likes")
-        .select("id")
-        .eq("publication_id", publication.id);
-
-    const nombreLikes =
-        likesResult.data
-        ? likesResult.data.length
-        : 0;
-
-    article.innerHTML = `
-
-        <small style="
-            color:#b67800;
-            font-weight:700;
-        ">
-            ${new Date(
-                publication.created_at
-            ).toLocaleDateString("fr-FR")}
-        </small>
-
-        <h2 style="
-            margin:10px 0;
-            color:#152238;
-            font-size:22px;
-        ">
-            ${publication.titre}
-        </h2>
-
-        <p style="
-            color:#657083;
-            line-height:1.8;
-            font-size:14px;
-        ">
-            ${publication.contenu}
-        </p>
-
-        ${
-            publication.image_url
-            ? `
-                <img
-                    src="${publication.image_url}"
-                    alt="${publication.titre}"
-                    style="
-                        width:100%;
-                        margin-top:20px;
-                        border-radius:12px;
-                        display:block;
-                    "
-                >
-            `
-            : ""
-        }
-
-        <div style="
-            margin-top:20px;
-            padding-top:18px;
-            border-top:1px solid #edf0f4;
-            display:flex;
-            gap:10px;
-            flex-wrap:wrap;
-        ">
-
-            <button
-                class="like-button"
-                style="
-                    border:none;
-                    background:#fff1f2;
-                    color:#d6336c;
-                    padding:10px 15px;
-                    border-radius:8px;
-                    cursor:pointer;
-                    font-weight:700;
-                "
-            >
-                ❤️ J'aime
-                <span class="like-count">
-                    ${nombreLikes}
-                </span>
-            </button>
-
-            <button
-                class="share-button"
-                style="
-                    border:none;
-                    background:#eef5ff;
-                    color:#082d59;
-                    padding:10px 15px;
-                    border-radius:8px;
-                    cursor:pointer;
-                    font-weight:700;
-                "
-            >
-                ↗️ Partager
-            </button>
-
-        </div>
-    `;
-
-    container.appendChild(article);
     /* =========================
-       LIKE
+       VISITEUR
     ========================= */
-
-    const likeButton =
-        article.querySelector(".like-button");
-
-    const likeCount =
-        article.querySelector(".like-count");
-
-
-    /* Identifiant du visiteur */
 
     let visitorId =
         localStorage.getItem(
             "bonjour_empire_visitor"
         );
+
 
     if (!visitorId) {
 
@@ -764,210 +592,462 @@ for (const publication of resultat.data) {
             "bonjour_empire_visitor",
             visitorId
         );
+
     }
 
 
-    /* Vérifier si le visiteur a déjà aimé */
+    /* =========================
+       PUBLICATIONS
+    ========================= */
 
-    const verification =
+    const resultat =
         await supabaseClient
-            .from("publication_likes")
-            .select("id")
-            .eq(
-                "publication_id",
-                publication.id
+            .from("publications")
+            .select(
+                "id, titre, contenu, image_url, created_at"
             )
-            .eq(
-                "visitor_id",
-                visitorId
-            )
-            .maybeSingle();
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
 
 
-    if (verification.data) {
+    if (resultat.error) {
 
-        likeButton.innerHTML =
-            `❤️ J'aime ✓
-             <span class="like-count">
-                ${nombreLikes}
-             </span>`;
+        container.innerHTML = `
+            <div class="chargement">
+                ❌ Erreur Supabase
+                <br><br>
+                ${resultat.error.message}
+            </div>
+        `;
 
-        likeButton.style.background =
-            "#d6336c";
+        console.error(resultat.error);
 
-        likeButton.style.color =
-            "#ffffff";
+        return;
     }
 
 
-    /* Cliquer sur J'aime */
+    if (
+        !resultat.data ||
+        resultat.data.length === 0
+    ) {
 
-    likeButton.addEventListener(
-        "click",
-        async function() {
+        container.innerHTML = `
+            <div class="chargement">
+                📭 Aucune publication
+                pour le moment.
+            </div>
+        `;
 
-            /* Vérifier encore une fois */
-
-            const dejaLike =
-                await supabaseClient
-                    .from("publication_likes")
-                    .select("id")
-                    .eq(
-                        "publication_id",
-                        publication.id
-                    )
-                    .eq(
-                        "visitor_id",
-                        visitorId
-                    )
-                    .maybeSingle();
+        return;
+    }
 
 
-            if (dejaLike.data) {
+    container.innerHTML = "";
 
-                return;
+
+    /* =========================
+       AFFICHER LES PUBLICATIONS
+    ========================= */
+
+    for (
+        const publication
+        of resultat.data
+    ) {
+
+        const article =
+            document.createElement(
+                "article"
+            );
+
+
+        article.style.background =
+            "#ffffff";
+
+        article.style.padding =
+            "25px";
+
+        article.style.borderRadius =
+            "16px";
+
+        article.style.border =
+            "1px solid #e7ebf1";
+
+        article.style.boxShadow =
+            "0 8px 25px rgba(20,35,60,0.05)";
+
+
+        /* =========================
+           NOMBRE DE LIKES
+        ========================= */
+
+        const likes =
+            await supabaseClient
+                .from("publication_likes")
+                .select("id")
+                .eq(
+                    "publication_id",
+                    publication.id
+                );
+
+
+        const nombreLikes =
+            likes.data
+            ? likes.data.length
+            : 0;
+
+
+        /* =========================
+           DÉJÀ LIKÉ ?
+        ========================= */
+
+        const monLike =
+            await supabaseClient
+                .from("publication_likes")
+                .select("id")
+                .eq(
+                    "publication_id",
+                    publication.id
+                )
+                .eq(
+                    "visitor_id",
+                    visitorId
+                )
+                .maybeSingle();
+
+
+        const dejaLike =
+            !!monLike.data;
+
+
+        /* =========================
+           HTML
+        ========================= */
+
+        article.innerHTML = `
+
+            <small style="
+                color:#b67800;
+                font-weight:700;
+            ">
+
+                ${new Date(
+                    publication.created_at
+                ).toLocaleDateString("fr-FR")}
+
+            </small>
+
+
+            <h2 style="
+                margin:10px 0;
+                color:#152238;
+                font-size:22px;
+            ">
+
+                ${publication.titre}
+
+            </h2>
+
+
+            <p style="
+                color:#657083;
+                line-height:1.8;
+                font-size:14px;
+            ">
+
+                ${publication.contenu}
+
+            </p>
+
+
+            ${
+                publication.image_url
+                ?
+                `
+                <img
+                    src="${publication.image_url}"
+                    alt="${publication.titre}"
+                    style="
+                        width:100%;
+                        margin-top:20px;
+                        border-radius:12px;
+                        display:block;
+                    "
+                >
+                `
+                :
+                ""
             }
 
 
-            /* Ajouter le like */
+            <div style="
+                margin-top:20px;
+                padding-top:18px;
+                border-top:1px solid #edf0f4;
+                display:flex;
+                gap:10px;
+                flex-wrap:wrap;
+            ">
 
-            const ajout =
-                await supabaseClient
-                    .from("publication_likes")
-                    .insert({
+                <button
+                    class="like-button"
+                    style="
+                        border:none;
+                        padding:10px 15px;
+                        border-radius:8px;
+                        cursor:pointer;
+                        font-weight:700;
 
-                        publication_id:
-                            publication.id,
+                        ${
+                            dejaLike
+                            ?
+                            `
+                            background:#d6336c;
+                            color:#ffffff;
+                            `
+                            :
+                            `
+                            background:#fff1f2;
+                            color:#d6336c;
+                            `
+                        }
+                    "
+                >
 
-                        visitor_id:
-                            visitorId
+                    ❤️ J'aime
+                    <span class="like-count">
+                        ${nombreLikes}
+                    </span>
 
-                    });
-
-
-            if (ajout.error) {
-
-                console.error(
-                    ajout.error
-                );
-
-                alert(
-                    "❌ Impossible d'ajouter le like."
-                );
-
-                return;
-            }
-
-
-            /* Récupérer le nouveau nombre */
-
-            const nouveauTotal =
-                await supabaseClient
-                    .from("publication_likes")
-                    .select("id")
-                    .eq(
-                        "publication_id",
-                        publication.id
-                    );
-
-
-            const total =
-                nouveauTotal.data
-                ? nouveauTotal.data.length
-                : nombreLikes + 1;
+                </button>
 
 
-            likeCount.textContent =
-                total;
+                <button
+                    class="share-button"
+                    style="
+                        border:none;
+                        background:#eef5ff;
+                        color:#082d59;
+                        padding:10px 15px;
+                        border-radius:8px;
+                        cursor:pointer;
+                        font-weight:700;
+                    "
+                >
 
+                    ↗️ Partager
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(article);
+
+
+        /* =========================
+           BOUTON LIKE
+        ========================= */
+
+        const likeButton =
+            article.querySelector(
+                ".like-button"
+            );
+
+
+        const likeCount =
+            article.querySelector(
+                ".like-count"
+            );
+
+
+        if (dejaLike) {
 
             likeButton.innerHTML =
                 `❤️ J'aime ✓
                  <span class="like-count">
-                    ${total}
+                    ${nombreLikes}
                  </span>`;
 
-
-            likeButton.style.background =
-                "#d6336c";
-
-            likeButton.style.color =
-                "#ffffff";
-
         }
-    );
 
 
-    /* =========================
-       PARTAGE
-    ========================= */
-
-    const shareButton =
-        article.querySelector(
-            ".share-button"
-        );
+        likeButton.addEventListener(
+            "click",
+            async function() {
 
 
-    shareButton.addEventListener(
-        "click",
-        async function() {
+                /* Empêcher un deuxième like */
 
-            const url =
-                window.location.href;
+                const verification =
+                    await supabaseClient
+                        .from("publication_likes")
+                        .select("id")
+                        .eq(
+                            "publication_id",
+                            publication.id
+                        )
+                        .eq(
+                            "visitor_id",
+                            visitorId
+                        )
+                        .maybeSingle();
 
 
-            if (navigator.share) {
+                if (verification.data) {
 
-                try {
-
-                    await navigator.share({
-
-                        title:
-                            publication.titre,
-
-                        text:
-                            publication.titre +
-                            " — Bonjour Empire",
-
-                        url:
-                            url
-
-                    });
-
-                } catch (error) {
-
-                    console.log(
-                        "Partage annulé"
-                    );
+                    return;
 
                 }
 
-            } else {
 
-                try {
+                /* Ajouter */
 
-                    await navigator.clipboard
-                        .writeText(url);
+                const ajout =
+                    await supabaseClient
+                        .from("publication_likes")
+                        .insert({
 
-                    alert(
-                        "🔗 Lien copié !"
+                            publication_id:
+                                publication.id,
+
+                            visitor_id:
+                                visitorId
+
+                        });
+
+
+                if (ajout.error) {
+
+                    console.error(
+                        ajout.error
                     );
 
-                } catch (error) {
-
                     alert(
-                        "🔗 Copiez le lien de la page pour le partager."
+                        "❌ Impossible d'ajouter le like."
                     );
+
+                    return;
+
+                }
+
+
+                /* Nouveau compteur */
+
+                const nouveau =
+                    await supabaseClient
+                        .from("publication_likes")
+                        .select("id")
+                        .eq(
+                            "publication_id",
+                            publication.id
+                        );
+
+
+                const total =
+                    nouveau.data
+                    ? nouveau.data.length
+                    : nombreLikes + 1;
+
+
+                likeButton.innerHTML =
+                    `❤️ J'aime ✓
+                     <span class="like-count">
+                        ${total}
+                     </span>`;
+
+
+                likeButton.style.background =
+                    "#d6336c";
+
+                likeButton.style.color =
+                    "#ffffff";
+
+            }
+        );
+
+
+        /* =========================
+           PARTAGE
+        ========================= */
+
+        const shareButton =
+            article.querySelector(
+                ".share-button"
+            );
+
+
+        shareButton.addEventListener(
+            "click",
+            async function() {
+
+                const url =
+                    window.location.href;
+
+
+                if (navigator.share) {
+
+                    try {
+
+                        await navigator.share({
+
+                            title:
+                                publication.titre,
+
+                            text:
+                                publication.titre +
+                                " — Bonjour Empire",
+
+                            url:
+                                url
+
+                        });
+
+                    } catch (error) {
+
+                        console.log(
+                            "Partage annulé"
+                        );
+
+                    }
+
+                } else {
+
+                    try {
+
+                        await navigator.clipboard
+                            .writeText(url);
+
+                        alert(
+                            "🔗 Lien copié !"
+                        );
+
+                    } catch (error) {
+
+                        alert(
+                            "🔗 Copiez le lien de cette page pour la partager."
+                        );
+
+                    }
 
                 }
 
             }
+        );
 
-        }
-    );
+    }
+
 }
 
-} // ferme chargerPublications()
+
+/* =========================
+   LANCER
+========================= */
 
 chargerPublications();
 
