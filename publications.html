@@ -559,31 +559,17 @@ const supabaseClient =
     );
 
 
-async function chargerPublications() {
+/* ==============================
+   IDENTIFIANT DU VISITEUR
+============================== */
 
-    const container =
-        document.getElementById(
-            "publications-container"
-        );
-
-    container.innerHTML = `
-        <div class="chargement">
-            ⏳ Chargement...
-        </div>
-    `;
-
-
-    /* =========================
-       VISITEUR
-    ========================= */
+function obtenirVisitorId() {
 
     let visitorId =
         localStorage.getItem(
             "bonjour_empire_visitor"
-           
         );
 
-console.log("VISITOR ID :", visitorId);
     if (!visitorId) {
 
         visitorId =
@@ -593,15 +579,35 @@ console.log("VISITOR ID :", visitorId);
             "bonjour_empire_visitor",
             visitorId
         );
-
     }
 
+    return visitorId;
+}
 
-    /* =========================
-       PUBLICATIONS
-    ========================= */
 
-    const resultat =
+const visitorId =
+    obtenirVisitorId();
+
+
+/* ==============================
+   CHARGER LES PUBLICATIONS
+============================== */
+
+async function chargerPublications() {
+
+    const container =
+        document.getElementById(
+            "publications-container"
+        );
+
+    container.innerHTML = `
+        <div class="chargement">
+            ⏳ Chargement des publications...
+        </div>
+    `;
+
+
+    const { data, error } =
         await supabaseClient
             .from("publications")
             .select(
@@ -615,31 +621,30 @@ console.log("VISITOR ID :", visitorId);
             );
 
 
-    if (resultat.error) {
+    if (error) {
+
+        console.error(
+            "Erreur publications :",
+            error
+        );
 
         container.innerHTML = `
             <div class="chargement">
-                ❌ Erreur Supabase
+                ❌ Impossible de charger les publications.
                 <br><br>
-                ${resultat.error.message}
+                ${error.message}
             </div>
         `;
-
-        console.error(resultat.error);
 
         return;
     }
 
 
-    if (
-        !resultat.data ||
-        resultat.data.length === 0
-    ) {
+    if (!data || data.length === 0) {
 
         container.innerHTML = `
             <div class="chargement">
-                📭 Aucune publication
-                pour le moment.
+                📭 Aucune publication pour le moment.
             </div>
         `;
 
@@ -650,14 +655,65 @@ console.log("VISITOR ID :", visitorId);
     container.innerHTML = "";
 
 
-    /* =========================
-       AFFICHER LES PUBLICATIONS
-    ========================= */
+    /* ==============================
+       CHAQUE PUBLICATION
+    ============================== */
 
-    for (
-        const publication
-        of resultat.data
-    ) {
+    for (const publication of data) {
+
+
+        /* COMPTER LES LIKES */
+
+        const { data: likesData, error: likesError } =
+            await supabaseClient
+                .from("publication_likes")
+                .select("id")
+                .eq(
+                    "publication_id",
+                    publication.id
+                );
+
+
+        const nombreLikes =
+            likesData
+            ? likesData.length
+            : 0;
+
+
+        if (likesError) {
+
+            console.error(
+                "Erreur likes :",
+                likesError
+            );
+
+        }
+
+
+        /* VÉRIFIER MON LIKE */
+
+        const { data: monLike } =
+            await supabaseClient
+                .from("publication_likes")
+                .select("id")
+                .eq(
+                    "publication_id",
+                    publication.id
+                )
+                .eq(
+                    "visitor_id",
+                    visitorId
+                )
+                .maybeSingle();
+
+
+        const dejaLike =
+            !!monLike;
+
+
+        /* ==============================
+           CRÉER LA CARTE
+        ============================== */
 
         const article =
             document.createElement(
@@ -680,53 +736,6 @@ console.log("VISITOR ID :", visitorId);
         article.style.boxShadow =
             "0 8px 25px rgba(20,35,60,0.05)";
 
-
-        /* =========================
-           NOMBRE DE LIKES
-        ========================= */
-
-        const likes =
-            await supabaseClient
-                .from("publication_likes")
-                .select("id")
-                .eq(
-                    "publication_id",
-                    publication.id
-                );
-
-
-        const nombreLikes =
-            likes.data
-            ? likes.data.length
-            : 0;
-
-
-        /* =========================
-           DÉJÀ LIKÉ ?
-        ========================= */
-
-        const monLike =
-            await supabaseClient
-                .from("publication_likes")
-                .select("id")
-                .eq(
-                    "publication_id",
-                    publication.id
-                )
-                .eq(
-                    "visitor_id",
-                    visitorId
-                )
-                .maybeSingle();
-
-
-        const dejaLike =
-            !!monLike.data;
-
-
-        /* =========================
-           HTML
-        ========================= */
 
         article.innerHTML = `
 
@@ -768,16 +777,16 @@ console.log("VISITOR ID :", visitorId);
                 publication.image_url
                 ?
                 `
-                <img
-                    src="${publication.image_url}"
-                    alt="${publication.titre}"
-                    style="
-                        width:100%;
-                        margin-top:20px;
-                        border-radius:12px;
-                        display:block;
-                    "
-                >
+                    <img
+                        src="${publication.image_url}"
+                        alt="${publication.titre}"
+                        style="
+                            width:100%;
+                            margin-top:20px;
+                            border-radius:12px;
+                            display:block;
+                        "
+                    >
                 `
                 :
                 ""
@@ -793,6 +802,7 @@ console.log("VISITOR ID :", visitorId);
                 flex-wrap:wrap;
             ">
 
+
                 <button
                     class="like-button"
                     style="
@@ -805,15 +815,9 @@ console.log("VISITOR ID :", visitorId);
                         ${
                             dejaLike
                             ?
-                            `
-                            background:#d6336c;
-                            color:#ffffff;
-                            `
+                            "background:#d6336c;color:#ffffff;"
                             :
-                            `
-                            background:#fff1f2;
-                            color:#d6336c;
-                            `
+                            "background:#fff1f2;color:#d6336c;"
                         }
                     "
                 >
@@ -851,9 +855,9 @@ console.log("VISITOR ID :", visitorId);
         container.appendChild(article);
 
 
-        /* =========================
+        /* ==============================
            BOUTON LIKE
-        ========================= */
+        ============================== */
 
         const likeButton =
             article.querySelector(
@@ -869,11 +873,12 @@ console.log("VISITOR ID :", visitorId);
 
         if (dejaLike) {
 
-            likeButton.innerHTML =
-                `❤️ J'aime ✓
-                 <span class="like-count">
+            likeButton.innerHTML = `
+                ❤️ J'aime ✓
+                <span class="like-count">
                     ${nombreLikes}
-                 </span>`;
+                </span>
+            `;
 
         }
 
@@ -883,9 +888,9 @@ console.log("VISITOR ID :", visitorId);
             async function() {
 
 
-                /* Empêcher un deuxième like */
+                /* Vérifier si déjà aimé */
 
-                const verification =
+                const { data: existingLike } =
                     await supabaseClient
                         .from("publication_likes")
                         .select("id")
@@ -900,16 +905,16 @@ console.log("VISITOR ID :", visitorId);
                         .maybeSingle();
 
 
-                if (verification.data) {
+                if (existingLike) {
 
                     return;
 
                 }
 
 
-                /* Ajouter */
+                /* Ajouter le like */
 
-                const ajout =
+                const { error: insertError } =
                     await supabaseClient
                         .from("publication_likes")
                         .insert({
@@ -923,10 +928,11 @@ console.log("VISITOR ID :", visitorId);
                         });
 
 
-                if (ajout.error) {
+                if (insertError) {
 
                     console.error(
-                        ajout.error
+                        "Erreur ajout like :",
+                        insertError
                     );
 
                     alert(
@@ -938,9 +944,9 @@ console.log("VISITOR ID :", visitorId);
                 }
 
 
-                /* Nouveau compteur */
+                /* Récupérer le nouveau compteur */
 
-                const nouveau =
+                const { data: updatedLikes } =
                     await supabaseClient
                         .from("publication_likes")
                         .select("id")
@@ -950,17 +956,22 @@ console.log("VISITOR ID :", visitorId);
                         );
 
 
-                const total =
-                    nouveau.data
-                    ? nouveau.data.length
+                const nouveauNombre =
+                    updatedLikes
+                    ? updatedLikes.length
                     : nombreLikes + 1;
 
 
-                likeButton.innerHTML =
-                    `❤️ J'aime ✓
-                     <span class="like-count">
-                        ${total}
-                     </span>`;
+                likeCount.textContent =
+                    nouveauNombre;
+
+
+                likeButton.innerHTML = `
+                    ❤️ J'aime ✓
+                    <span class="like-count">
+                        ${nouveauNombre}
+                    </span>
+                `;
 
 
                 likeButton.style.background =
@@ -969,13 +980,19 @@ console.log("VISITOR ID :", visitorId);
                 likeButton.style.color =
                     "#ffffff";
 
+
+                /* Empêcher plusieurs clics */
+
+                likeButton.disabled =
+                    true;
+
             }
         );
 
 
-        /* =========================
-           PARTAGE
-        ========================= */
+        /* ==============================
+           PARTAGER
+        ============================== */
 
         const shareButton =
             article.querySelector(
@@ -987,11 +1004,14 @@ console.log("VISITOR ID :", visitorId);
             "click",
             async function() {
 
+
                 const url =
                     window.location.href;
 
 
-                if (navigator.share) {
+                if (
+                    navigator.share
+                ) {
 
                     try {
 
@@ -1017,7 +1037,9 @@ console.log("VISITOR ID :", visitorId);
 
                     }
 
-                } else {
+                }
+
+                else {
 
                     try {
 
@@ -1028,10 +1050,12 @@ console.log("VISITOR ID :", visitorId);
                             "🔗 Lien copié !"
                         );
 
-                    } catch (error) {
+                    }
+
+                    catch (error) {
 
                         alert(
-                            "🔗 Copiez le lien de cette page pour la partager."
+                            "🔗 Copiez le lien de la page pour la partager."
                         );
 
                     }
@@ -1046,9 +1070,9 @@ console.log("VISITOR ID :", visitorId);
 }
 
 
-/* =========================
+/* ==============================
    LANCER
-========================= */
+============================== */
 
 chargerPublications();
 
