@@ -14,7 +14,6 @@
         Administration | Bonjour Empire
     </title>
 
-    <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -27,7 +26,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
 
         body {
             font-family:
@@ -43,367 +41,245 @@
                 );
 
             color: #172033;
-
             min-height: 100vh;
         }
 
-
-        /* =========================
-           HEADER
-        ========================= */
-
         header {
             min-height: 82px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             padding: 0 7%;
-
             background: #ffffff;
-
             border-bottom:
                 1px solid #edf0f5;
         }
 
-
-        /* LOGO */
-
         .logo {
             display: flex;
-
             align-items: center;
-
             gap: 12px;
-
             text-decoration: none;
         }
-
 
         .logo-icon {
             width: 48px;
             height: 48px;
-
             border-radius: 50%;
-
             overflow: hidden;
-
             background: #f4a900;
         }
-
 
         .logo-icon img {
             width: 100%;
             height: 100%;
-
             object-fit: cover;
-
             border-radius: 50%;
         }
 
-
         .logo-text strong {
             display: block;
-
             font-size: 18px;
-
             color: #08264d;
         }
 
-
         .logo-text span {
             display: block;
-
             margin-top: 3px;
-
             font-size: 10px;
-
             font-weight: 700;
-
             letter-spacing: 1px;
-
             color: #d79500;
         }
 
-
-        /* =========================
-           CONTENU
-        ========================= */
-
         .admin-container {
-
             width: 100%;
-
             max-width: 850px;
-
             margin: auto;
-
-            padding:
-                60px 20px;
+            padding: 60px 20px;
         }
 
-
         .admin-title {
-
             text-align: center;
-
             margin-bottom: 40px;
         }
 
-
         .admin-title .badge {
-
             display: inline-block;
-
-            padding:
-                8px 15px;
-
+            padding: 8px 15px;
             border-radius: 50px;
-
             background: #fff8e7;
-
             color: #b67800;
-
             font-size: 10px;
-
             font-weight: 800;
-
             letter-spacing: 1px;
-
             margin-bottom: 15px;
         }
 
-
         .admin-title h1 {
-
             font-size:
                 clamp(32px, 6vw, 52px);
-
             color: #101a2b;
-
             margin-bottom: 12px;
         }
 
-
         .admin-title p {
-
             color: #6c7788;
-
             font-size: 14px;
-
             line-height: 1.7;
         }
 
-
-        /* =========================
-           CARTE
-        ========================= */
-
         .admin-card {
-
             background: #ffffff;
-
             border:
                 1px solid #e7ebf1;
-
             border-radius: 18px;
-
             padding: 30px;
-
             box-shadow:
                 0 15px 40px
                 rgba(20,35,60,0.07);
         }
 
-
         .form-group {
-
             margin-bottom: 22px;
         }
 
-
         .form-group label {
-
             display: block;
-
             margin-bottom: 8px;
-
             color: #152238;
-
             font-size: 13px;
-
             font-weight: 700;
         }
 
-
         .form-group input,
         .form-group textarea {
-
             width: 100%;
-
             padding: 14px 15px;
-
             border:
                 1px solid #dce2ea;
-
             border-radius: 9px;
-
             outline: none;
-
             font-family: inherit;
-
             font-size: 14px;
-
             color: #172033;
-
             background: #fbfcfe;
-
             transition: 0.25s;
         }
 
-
         .form-group textarea {
-
             min-height: 180px;
-
             resize: vertical;
         }
 
-
         .form-group input:focus,
         .form-group textarea:focus {
-
             border-color: #d79500;
-
             background: #ffffff;
-
             box-shadow:
                 0 0 0 3px
                 rgba(215,149,0,0.10);
         }
 
+        .media-preview {
+            display: none;
+            margin-top: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f5f7fa;
+        }
 
-        /* =========================
-           BOUTON
-        ========================= */
+        .media-preview img,
+        .media-preview video {
+            width: 100%;
+            max-height: 400px;
+            display: block;
+            object-fit: contain;
+        }
 
         .publish-button {
-
             width: 100%;
-
             padding: 15px;
-
             border: none;
-
             border-radius: 9px;
-
             background: #082d59;
-
             color: #ffffff;
-
             font-size: 14px;
-
             font-weight: 700;
-
             cursor: pointer;
-
             transition: 0.25s;
         }
 
-
         .publish-button:hover {
-
             background: #0d407b;
-
             transform:
                 translateY(-2px);
         }
 
-
-        /* =========================
-           RETOUR
-        ========================= */
+        .publish-button:disabled {
+            opacity: 0.7;
+            cursor: wait;
+            transform: none;
+        }
 
         .back-link {
-
             display: block;
-
             text-align: center;
-
             margin-top: 25px;
-
             color: #6c7788;
-
             text-decoration: none;
-
             font-size: 13px;
         }
 
-
         .back-link:hover {
-
             color: #b67800;
         }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
 
         @media (max-width: 600px) {
 
             header {
-
                 padding: 12px 5%;
             }
 
-
             .logo-icon {
-
                 width: 42px;
                 height: 42px;
             }
 
-
             .logo-text strong {
-
                 font-size: 15px;
             }
 
-
             .logo-text span {
-
                 font-size: 8px;
             }
 
-
             .admin-container {
-
                 padding:
                     45px 15px;
             }
 
-
             .admin-card {
-
                 padding: 22px 17px;
-
                 border-radius: 14px;
             }
 
-
             .admin-title h1 {
-
                 font-size: 34px;
             }
 
-
             .admin-title p {
-
                 font-size: 13px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                font-size: 16px;
+            }
+
+            .publish-button {
+                min-height: 52px;
+                font-size: 15px;
             }
 
         }
@@ -432,7 +308,6 @@
 
         </div>
 
-
         <div class="logo-text">
 
             <strong>
@@ -456,25 +331,17 @@
     <div class="admin-title">
 
         <div class="badge">
-
             ESPACE ADMINISTRATEUR
-
         </div>
 
-
         <h1>
-
             Publier
-
         </h1>
 
-
         <p>
-
             Créez et partagez les actualités,
             activités et informations de
             Bonjour Empire.
-
         </p>
 
     </div>
@@ -486,11 +353,8 @@
         <div class="form-group">
 
             <label for="titre">
-
                 Titre de la publication
-
             </label>
-
 
             <input
                 type="text"
@@ -504,11 +368,8 @@
         <div class="form-group">
 
             <label for="contenu">
-
                 Contenu
-
             </label>
-
 
             <textarea
                 id="contenu"
@@ -520,18 +381,30 @@
 
         <div class="form-group">
 
-            <label for="image_url">
-
-                Lien de l'image (facultatif)
-
+            <label for="media">
+                📷 Photo ou 🎥 Vidéo
             </label>
 
-
             <input
-                type="url"
-                id="image_url"
-                placeholder="https://..."
+                type="file"
+                id="media"
+                accept="image/*,video/*"
             >
+
+            <small style="
+                display:block;
+                margin-top:8px;
+                color:#7a8596;
+                font-size:12px;
+            ">
+                Sélectionnez une photo ou une vidéo.
+            </small>
+
+
+            <div
+                id="media-preview"
+                class="media-preview"
+            ></div>
 
         </div>
 
@@ -562,8 +435,6 @@
 
 
 </main>
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -588,6 +459,104 @@ const bouton =
     );
 
 
+const mediaInput =
+    document.getElementById(
+        "media"
+    );
+
+
+const mediaPreview =
+    document.getElementById(
+        "media-preview"
+    );
+
+
+/* ==============================
+   APERÇU PHOTO / VIDÉO
+============================== */
+
+mediaInput.addEventListener(
+    "change",
+    function () {
+
+        const fichier =
+            mediaInput.files[0];
+
+        mediaPreview.innerHTML = "";
+
+        mediaPreview.style.display =
+            "none";
+
+
+        if (!fichier) {
+            return;
+        }
+
+
+        const url =
+            URL.createObjectURL(
+                fichier
+            );
+
+
+        if (
+            fichier.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+            image.src = url;
+
+            image.alt =
+                "Aperçu de la publication";
+
+            mediaPreview.appendChild(
+                image
+            );
+
+        }
+
+
+        else if (
+            fichier.type.startsWith(
+                "video/"
+            )
+        ) {
+
+            const video =
+                document.createElement(
+                    "video"
+                );
+
+            video.src = url;
+
+            video.controls = true;
+
+            video.playsInline = true;
+
+            mediaPreview.appendChild(
+                video
+            );
+
+        }
+
+
+        mediaPreview.style.display =
+            "block";
+
+    }
+);
+
+
+/* ==============================
+   PUBLICATION
+============================== */
+
 bouton.addEventListener(
     "click",
     async function () {
@@ -604,10 +573,8 @@ bouton.addEventListener(
             ).value.trim();
 
 
-        const image_url =
-            document.getElementById(
-                "image_url"
-            ).value.trim();
+        const fichier =
+            mediaInput.files[0];
 
 
         /* Vérification */
@@ -619,84 +586,213 @@ bouton.addEventListener(
             );
 
             return;
-
         }
 
 
-        /* Désactiver le bouton */
+        /* Désactiver */
 
-        bouton.disabled = true;
+        bouton.disabled =
+            true;
 
         bouton.innerHTML =
             "⏳ Publication en cours...";
 
 
-        /* Envoi vers Supabase */
+        try {
 
-        const { data, error } =
-            await supabaseClient
-                .from("publications")
-                .insert([
-                    {
-                        titre: titre,
-                        contenu: contenu,
-                        image_url:
-                            image_url || null
-                    }
-                ])
-                .select();
+            let mediaUrl =
+                null;
 
 
-        /* Gestion de l'erreur */
+            /* =========================
+               UPLOAD MÉDIA
+            ========================= */
 
-        if (error) {
+            if (fichier) {
 
-            console.error(error);
+                const extension =
+                    fichier.name
+                        .split(".")
+                        .pop()
+                        .toLowerCase();
+
+
+                const nomFichier =
+                    Date.now() +
+                    "-" +
+                    Math.random()
+                        .toString(36)
+                        .substring(2) +
+                    "." +
+                    extension;
+
+
+                const chemin =
+                    "publications/" +
+                    nomFichier;
+
+
+                const {
+                    error: uploadError
+                } =
+                    await supabaseClient
+                        .storage
+                        .from(
+                            "publications-media"
+                        )
+                        .upload(
+                            chemin,
+                            fichier,
+                            {
+                                cacheControl:
+                                    "3600",
+
+                                upsert:
+                                    false
+                            }
+                        );
+
+
+                if (uploadError) {
+
+                    console.error(
+                        "Erreur upload :",
+                        uploadError
+                    );
+
+                    alert(
+                        "❌ Impossible d'envoyer le fichier.\n\n" +
+                        uploadError.message
+                    );
+
+                    return;
+                }
+
+
+                /* =========================
+                   URL PUBLIQUE
+                ========================= */
+
+                const {
+                    data:
+                        publicUrlData
+                } =
+                    supabaseClient
+                        .storage
+                        .from(
+                            "publications-media"
+                        )
+                        .getPublicUrl(
+                            chemin
+                        );
+
+
+                mediaUrl =
+                    publicUrlData.publicUrl;
+
+            }
+
+
+            /* =========================
+               ENREGISTRER PUBLICATION
+            ========================= */
+
+            const {
+                error:
+                    publicationError
+            } =
+                await supabaseClient
+                    .from(
+                        "publications"
+                    )
+                    .insert([
+                        {
+                            titre:
+                                titre,
+
+                            contenu:
+                                contenu,
+
+                            image_url:
+                                mediaUrl
+                        }
+                    ]);
+
+
+            if (
+                publicationError
+            ) {
+
+                console.error(
+                    "Erreur publication :",
+                    publicationError
+                );
+
+                alert(
+                    "❌ Impossible de publier.\n\n" +
+                    publicationError.message
+                );
+
+                return;
+            }
+
+
+            /* =========================
+               SUCCÈS
+            ========================= */
 
             alert(
-                "❌ Erreur : " +
+                "🎉 Publication publiée avec succès !"
+            );
+
+
+            document.getElementById(
+                "titre"
+            ).value = "";
+
+
+            document.getElementById(
+                "contenu"
+            ).value = "";
+
+
+            mediaInput.value = "";
+
+
+            mediaPreview.innerHTML =
+                "";
+
+            mediaPreview.style.display =
+                "none";
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Erreur générale :",
+                error
+            );
+
+            alert(
+                "❌ Une erreur est survenue.\n\n" +
                 error.message
             );
 
-            bouton.disabled = false;
+        }
+
+        finally {
+
+            bouton.disabled =
+                false;
 
             bouton.innerHTML =
                 '<i class="fa-solid fa-paper-plane"></i> Publier';
 
-            return;
-
         }
 
-
-        /* Succès */
-
-        alert(
-            "🎉 Publication publiée avec succès !"
-        );
-
-
-        document.getElementById(
-            "titre"
-        ).value = "";
-
-
-        document.getElementById(
-            "contenu"
-        ).value = "";
-
-
-        document.getElementById(
-            "image_url"
-        ).value = "";
-
-
-        bouton.disabled = false;
-
-        bouton.innerHTML =
-            '<i class="fa-solid fa-paper-plane"></i> Publier';
-
     }
-
 );
 
 </script>
