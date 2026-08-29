@@ -629,9 +629,10 @@ async function chargerPublications() {
 container.innerHTML = "";
 
 resultat.data.forEach(
-    async function(publication) {
+    function(publication) {
 
-        const article = document.createElement("article");
+        const article =
+            document.createElement("article");
 
         article.style.background = "#ffffff";
         article.style.padding = "25px";
@@ -639,14 +640,6 @@ resultat.data.forEach(
         article.style.border = "1px solid #e7ebf1";
         article.style.boxShadow =
             "0 8px 25px rgba(20,35,60,0.05)";
-
-        const { count } = await supabaseClient
-            .from("publication_likes")
-            .select("*", {
-                count: "exact",
-                head: true
-            })
-            .eq("publication_id", publication.id);
 
         article.innerHTML = `
 
@@ -685,7 +678,6 @@ resultat.data.forEach(
                             width:100%;
                             margin-top:20px;
                             border-radius:12px;
-                            display:block;
                         "
                     >
                 `
@@ -698,11 +690,11 @@ resultat.data.forEach(
                 border-top:1px solid #edf0f4;
                 display:flex;
                 gap:10px;
-                flex-wrap:wrap;
             ">
 
                 <button
                     class="like-button"
+                    data-id="${publication.id}"
                     style="
                         border:none;
                         background:#fff1f2;
@@ -714,9 +706,6 @@ resultat.data.forEach(
                     "
                 >
                     ❤️ J'aime
-                    <span class="like-count">
-                        ${count || 0}
-                    </span>
                 </button>
 
                 <button
@@ -743,8 +732,9 @@ resultat.data.forEach(
         /* LIKE */
 
         const likeButton =
-            article.querySelector(".like-button");
-
+            article.querySelector(
+                ".like-button"
+            );
 
         likeButton.addEventListener(
             "click",
@@ -766,7 +756,6 @@ resultat.data.forEach(
                     );
                 }
 
-
                 const { data: dejaLike } =
                     await supabaseClient
                         .from("publication_likes")
@@ -781,7 +770,6 @@ resultat.data.forEach(
                         )
                         .maybeSingle();
 
-
                 if (dejaLike) {
 
                     alert(
@@ -791,18 +779,15 @@ resultat.data.forEach(
                     return;
                 }
 
-
                 const { error } =
                     await supabaseClient
                         .from("publication_likes")
                         .insert({
                             publication_id:
                                 publication.id,
-
                             visitor_id:
                                 visitorId
                         });
-
 
                 if (error) {
 
@@ -815,32 +800,14 @@ resultat.data.forEach(
                     return;
                 }
 
-
-                const { count: nouveauCount } =
-                    await supabaseClient
-                        .from("publication_likes")
-                        .select("*", {
-                            count: "exact",
-                            head: true
-                        })
-                        .eq(
-                            "publication_id",
-                            publication.id
-                        );
-
-
-                article.querySelector(
-                    ".like-count"
-                ).textContent =
-                    nouveauCount || 0;
-
+                likeButton.innerHTML =
+                    "❤️ J'aime ✓";
 
                 likeButton.style.background =
                     "#d6336c";
 
                 likeButton.style.color =
                     "#ffffff";
-
             }
         );
 
@@ -852,7 +819,6 @@ resultat.data.forEach(
                 ".share-button"
             );
 
-
         shareButton.addEventListener(
             "click",
             async function() {
@@ -860,24 +826,17 @@ resultat.data.forEach(
                 const url =
                     window.location.href;
 
-
-                if (
-                    navigator.share
-                ) {
+                if (navigator.share) {
 
                     try {
 
                         await navigator.share({
-
                             title:
                                 publication.titre,
-
                             text:
                                 publication.titre +
                                 " — Bonjour Empire",
-
-                            url:
-                                url
+                            url: url
                         });
 
                     } catch (error) {
@@ -885,16 +844,28 @@ resultat.data.forEach(
                         console.log(
                             "Partage annulé"
                         );
+
                     }
 
                 } else {
 
-                    await navigator.clipboard
-                        .writeText(url);
+                    try {
 
-                    alert(
-                        "🔗 Lien copié !"
-                    );
+                        await navigator.clipboard
+                            .writeText(url);
+
+                        alert(
+                            "🔗 Lien copié !"
+                        );
+
+                    } catch (error) {
+
+                        alert(
+                            "🔗 Copiez le lien de la page pour la partager."
+                        );
+
+                    }
+
                 }
 
             }
@@ -902,7 +873,6 @@ resultat.data.forEach(
 
     }
 );
-
 chargerPublications();
 
 </script>
