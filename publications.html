@@ -629,8 +629,6 @@ async function chargerPublications() {
 
 
 container.innerHTML = "";
-
-
 resultat.data.forEach(
     async function(publication) {
 
@@ -660,11 +658,9 @@ resultat.data.forEach(
                 color:#b67800;
                 font-weight:700;
             ">
-
                 ${new Date(
                     publication.created_at
                 ).toLocaleDateString("fr-FR")}
-
             </small>
 
 
@@ -673,9 +669,7 @@ resultat.data.forEach(
                 color:#152238;
                 font-size:22px;
             ">
-
                 ${publication.titre}
-
             </h2>
 
 
@@ -684,9 +678,7 @@ resultat.data.forEach(
                 line-height:1.8;
                 font-size:14px;
             ">
-
                 ${publication.contenu}
-
             </p>
 
 
@@ -719,9 +711,6 @@ resultat.data.forEach(
                 flex-wrap:wrap;
             ">
 
-
-                <!-- LIKE -->
-
                 <button
                     class="like-button"
                     style="
@@ -734,17 +723,10 @@ resultat.data.forEach(
                         font-weight:700;
                     "
                 >
-
                     ❤️ J'aime
-
-                    <span class="like-count">
-                        0
-                    </span>
-
+                    <span class="like-count">0</span>
                 </button>
 
-
-                <!-- PARTAGE -->
 
                 <button
                     class="share-button"
@@ -758,33 +740,59 @@ resultat.data.forEach(
                         font-weight:700;
                     "
                 >
-
                     ↗️ Partager
-
-                    <span class="share-count">
-                        0
-                    </span>
-
+                    <span class="share-count">0</span>
                 </button>
 
-
             </div>
-
         `;
 
 
         container.appendChild(article);
 
 
-        /* =========================
-           COMPTEUR DES LIKES
-        ========================= */
+        /* =================================
+           IDENTIFIANT DU VISITEUR
+        ================================= */
+
+        let visitorId =
+            localStorage.getItem(
+                "bonjour_empire_visitor"
+            );
+
+
+        if (!visitorId) {
+
+            visitorId =
+                crypto.randomUUID();
+
+            localStorage.setItem(
+                "bonjour_empire_visitor",
+                visitorId
+            );
+
+        }
+
+
+        /* =================================
+           ELEMENTS
+        ================================= */
+
+        const likeButton =
+            article.querySelector(
+                ".like-button"
+            );
+
 
         const likeCount =
             article.querySelector(
                 ".like-count"
             );
 
+
+        /* =================================
+           NOMBRE TOTAL DE LIKES
+        ================================= */
 
         const resultatLikes =
             await supabaseClient
@@ -807,40 +815,53 @@ resultat.data.forEach(
         }
 
 
-        /* =========================
-           LIKE
-        ========================= */
+        /* =================================
+           VÉRIFIER SI CE VISITEUR A DÉJÀ LIKÉ
+        ================================= */
 
-        const likeButton =
-            article.querySelector(
-                ".like-button"
-            );
+        const dejaLike =
+            await supabaseClient
+                .from("publication_likes")
+                .select("id")
+                .eq(
+                    "publication_id",
+                    publication.id
+                )
+                .eq(
+                    "visitor_id",
+                    visitorId
+                )
+                .maybeSingle();
 
+
+        if (dejaLike.data) {
+
+            likeButton.innerHTML =
+                `❤️ J'aime ✓
+                <span class="like-count">
+                    ${resultatLikes.count || 0}
+                </span>`;
+
+            likeButton.style.background =
+                "#d6336c";
+
+            likeButton.style.color =
+                "#ffffff";
+
+        }
+
+
+        /* =================================
+           CLIQUER SUR LIKE
+        ================================= */
 
         likeButton.addEventListener(
             "click",
             async function() {
 
-                let visitorId =
-                    localStorage.getItem(
-                        "bonjour_empire_visitor"
-                    );
+                /* Vérifier encore */
 
-
-                if (!visitorId) {
-
-                    visitorId =
-                        crypto.randomUUID();
-
-                    localStorage.setItem(
-                        "bonjour_empire_visitor",
-                        visitorId
-                    );
-
-                }
-
-
-                const { data: dejaLike } =
+                const verification =
                     await supabaseClient
                         .from("publication_likes")
                         .select("id")
@@ -855,18 +876,16 @@ resultat.data.forEach(
                         .maybeSingle();
 
 
-                if (dejaLike) {
-
-                    alert(
-                        "❤️ Vous avez déjà aimé cette publication."
-                    );
+                if (verification.data) {
 
                     return;
 
                 }
 
 
-                const { error } =
+                /* Ajouter le like */
+
+                const insertion =
                     await supabaseClient
                         .from("publication_likes")
                         .insert({
@@ -880,9 +899,11 @@ resultat.data.forEach(
                         });
 
 
-                if (error) {
+                if (insertion.error) {
 
-                    console.error(error);
+                    console.error(
+                        insertion.error
+                    );
 
                     alert(
                         "❌ Impossible d'ajouter le like."
@@ -893,7 +914,9 @@ resultat.data.forEach(
                 }
 
 
-                const { count: nouveauNombre } =
+                /* Nouveau nombre */
+
+                const nouveau =
                     await supabaseClient
                         .from("publication_likes")
                         .select("*", {
@@ -907,13 +930,13 @@ resultat.data.forEach(
 
 
                 likeCount.textContent =
-                    nouveauNombre || 0;
+                    nouveau.count || 0;
 
 
                 likeButton.innerHTML =
-                    `❤️ J'aime
+                    `❤️ J'aime ✓
                     <span class="like-count">
-                        ${nouveauNombre || 0}
+                        ${nouveau.count || 0}
                     </span>`;
 
 
@@ -927,9 +950,9 @@ resultat.data.forEach(
         );
 
 
-        /* =========================
+        /* =================================
            PARTAGE
-        ========================= */
+        ================================= */
 
         const shareButton =
             article.querySelector(
@@ -943,11 +966,20 @@ resultat.data.forEach(
             );
 
 
+        const anciensPartages =
+            localStorage.getItem(
+                "partages_" +
+                publication.id
+            );
+
+
+        shareCount.textContent =
+            anciensPartages || 0;
+
+
         shareButton.addEventListener(
             "click",
             async function() {
-
-                /* Compteur local */
 
                 let totalPartages =
                     parseInt(
@@ -976,9 +1008,7 @@ resultat.data.forEach(
                     window.location.href;
 
 
-                if (
-                    navigator.share
-                ) {
+                if (navigator.share) {
 
                     try {
 
@@ -1027,23 +1057,6 @@ resultat.data.forEach(
 
             }
         );
-
-
-        /* Restaurer le nombre de partages */
-
-        const anciensPartages =
-            localStorage.getItem(
-                "partages_" +
-                publication.id
-            );
-
-
-        if (anciensPartages) {
-
-            shareCount.textContent =
-                anciensPartages;
-
-        }
 
     }
 );
