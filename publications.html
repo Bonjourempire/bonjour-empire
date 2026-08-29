@@ -1144,28 +1144,25 @@ commentButton.addEventListener(
                         });
 
 
-                if (error) {
+             if (error) {
 
-                    console.error(
-                        "Erreur publication commentaire :",
-                        error
-                    );
+    console.error(
+        "Erreur publication commentaire :",
+        error
+    );
 
-                    alert(
-                        "❌ Impossible de publier le commentaire."
-                    );
+    alert(
+        "❌ ERREUR SUPABASE :\n\n" +
+        error.message
+    );
 
-                    publishButton.disabled =
-                        false;
+    publishButton.disabled = false;
 
-                    publishButton.textContent =
-                        "📝 Publier le commentaire";
+    publishButton.textContent =
+        "📝 Publier le commentaire";
 
-                    return;
-
-                }
-
-
+    return;
+}
                 input.value = "";
 
 
