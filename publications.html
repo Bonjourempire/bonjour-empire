@@ -855,7 +855,363 @@ async function chargerPublications() {
            
         container.appendChild(article);
 
+/* ==============================
+   COMMENTAIRES
+============================== */
 
+const commentButton =
+    article.querySelector(".comment-button");
+
+const commentCount =
+    article.querySelector(".comment-count");
+
+
+/* Compter les commentaires */
+
+async function compterCommentaires() {
+
+    const { data, error } =
+        await supabaseClient
+            .from("publication_comments")
+            .select("id")
+            .eq(
+                "publication_id",
+                publication.id
+            );
+
+    if (error) {
+        console.error(
+            "Erreur commentaires :",
+            error
+        );
+        return 0;
+    }
+
+    return data ? data.length : 0;
+}
+
+
+const nombreCommentaires =
+    await compterCommentaires();
+
+commentCount.textContent =
+    nombreCommentaires;
+
+
+/* Cliquer sur Commenter */
+
+commentButton.addEventListener(
+    "click",
+    async function() {
+
+        let zone =
+            article.querySelector(
+                ".comment-zone"
+            );
+
+
+        /* Fermer la zone */
+
+        if (zone) {
+
+            zone.remove();
+
+            return;
+
+        }
+
+
+        /* Créer la zone */
+
+        zone =
+            document.createElement("div");
+
+        zone.className =
+            "comment-zone";
+
+
+        zone.style.marginTop =
+            "15px";
+
+
+        zone.innerHTML = `
+
+            <textarea
+                class="comment-input"
+                placeholder="Écrivez votre commentaire..."
+                maxlength="500"
+                style="
+                    width:100%;
+                    min-height:90px;
+                    padding:12px;
+                    border:1px solid #dfe4eb;
+                    border-radius:10px;
+                    resize:vertical;
+                    font-family:inherit;
+                    font-size:14px;
+                    outline:none;
+                "
+            ></textarea>
+
+            <button
+                class="publish-comment"
+                style="
+                    margin-top:8px;
+                    border:none;
+                    background:#082d59;
+                    color:white;
+                    padding:10px 18px;
+                    border-radius:8px;
+                    cursor:pointer;
+                    font-weight:700;
+                "
+            >
+                Publier
+            </button>
+
+            <div
+                class="comments-list"
+                style="
+                    margin-top:15px;
+                "
+            ></div>
+
+        `;
+
+
+        article.appendChild(zone);
+
+
+        /* Charger les commentaires */
+
+        await afficherCommentaires(
+            publication.id,
+            zone
+        );
+
+
+        const publishButton =
+            zone.querySelector(
+                ".publish-comment"
+            );
+
+
+        const input =
+            zone.querySelector(
+                ".comment-input"
+            );
+
+
+        /* Publier */
+
+        publishButton.addEventListener(
+            "click",
+            async function() {
+
+                const texte =
+                    input.value.trim();
+
+
+                if (!texte) {
+
+                    alert(
+                        "✍️ Écrivez un commentaire."
+                    );
+
+                    return;
+
+                }
+
+
+                publishButton.disabled =
+                    true;
+
+
+                const { error } =
+                    await supabaseClient
+                        .from(
+                            "publication_comments"
+                        )
+                        .insert({
+
+                            publication_id:
+                                publication.id,
+
+                            visitor_id:
+                                visitorId,
+
+                            commentaire:
+                                texte
+
+                        });
+
+
+                if (error) {
+
+                    console.error(
+                        "Erreur commentaire :",
+                        error
+                    );
+
+                    alert(
+                        "❌ Impossible de publier le commentaire."
+                    );
+
+                    publishButton.disabled =
+                        false;
+
+                    return;
+
+                }
+
+
+                input.value = "";
+
+
+                publishButton.disabled =
+                    false;
+
+
+                /* Actualiser */
+
+                await afficherCommentaires(
+                    publication.id,
+                    zone
+                );
+
+
+                const nouveauNombre =
+                    await compterCommentaires();
+
+
+                commentCount.textContent =
+                    nouveauNombre;
+
+            }
+        );
+
+    }
+);
+
+
+/* ==============================
+   AFFICHER LES COMMENTAIRES
+============================== */
+
+async function afficherCommentaires(
+    publicationId,
+    zone
+) {
+
+    const liste =
+        zone.querySelector(
+            ".comments-list"
+        );
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("publication_comments")
+            .select(
+                "commentaire, created_at"
+            )
+            .eq(
+                "publication_id",
+                publicationId
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Erreur chargement commentaires :",
+            error
+        );
+
+        liste.innerHTML =
+            "❌ Impossible de charger les commentaires.";
+
+        return;
+
+    }
+
+
+    if (!data || data.length === 0) {
+
+        liste.innerHTML = `
+            <p style="
+                color:#8993a3;
+                font-size:13px;
+            ">
+                Aucun commentaire pour le moment.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    liste.innerHTML = "";
+
+
+    data.forEach(
+        function(commentaire) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.style.background =
+                "#f7f9fc";
+
+            div.style.padding =
+                "12px";
+
+            div.style.borderRadius =
+                "10px";
+
+            div.style.marginBottom =
+                "8px";
+
+
+            div.innerHTML = `
+
+                <p style="
+                    margin:0;
+                    color:#374151;
+                    font-size:14px;
+                    line-height:1.6;
+                ">
+                    ${commentaire.commentaire}
+                </p>
+
+                <small style="
+                    color:#9aa4b3;
+                    font-size:10px;
+                ">
+                    ${new Date(
+                        commentaire.created_at
+                    ).toLocaleString("fr-FR")}
+                </small>
+
+            `;
+
+
+            liste.appendChild(div);
+
+        }
+    );
+
+}
         /* ==============================
            BOUTON LIKE
         ============================== */
