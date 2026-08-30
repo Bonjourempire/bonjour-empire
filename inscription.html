@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Créer un compte Bonjour Empire"
+    >
+
+    <title>
+        Créer un compte | Bonjour Empire
+    </title>
+
+
+    <!-- POLICE -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ICÔNES -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                "Inter",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7f9fc,
+                    #ffffff
+                );
+
+            color: #172033;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+
+            min-height: 75px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 7%;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid #edf0f5;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-decoration: none;
+        }
+
+
+        .logo-icon {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            overflow: hidden;
+
+            background: #f4a900;
+        }
+
+
+        .logo-icon img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .logo-text strong {
+
+            display: block;
+
+            font-size: 17px;
+
+            color: #08264d;
+        }
+
+
+        .logo-text span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            color: #d79500;
+        }
+
+
+        /* =========================
+           CONTENU
+        ========================= */
+
+        main {
+
+            width: 100%;
+
+            max-width: 480px;
+
+            margin: auto;
+
+            padding: 45px 20px;
+        }
+
+
+        .card {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e7ebf1;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(20,35,60,0.07);
+        }
+
+
+        .title {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+
+        .title .badge {
+
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            border-radius: 50px;
+
+            background: #fff8e7;
+
+            color: #b67800;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 13px;
+        }
+
+
+        .title h1 {
+
+            font-size: 30px;
+
+            color: #101a2b;
+
+            margin-bottom: 10px;
+        }
+
+
+        .title p {
+
+            color: #6c7788;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           GOOGLE
+        ========================= */
+
+        .google-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border:
+                1px solid #dfe4eb;
+
+            border-radius: 9px;
+
+            background: #ffffff;
+
+            color: #172033;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            transition: 0.2s;
+        }
+
+
+        .google-button:hover {
+
+            background: #f7f9fc;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .google-icon {
+
+            font-size: 18px;
+
+            color: #4285f4;
+        }
+
+
+        /* =========================
+           SEPARATEUR
+        ========================= */
+
+        .separator {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 25px 0;
+
+            color: #9aa4b3;
+
+            font-size: 11px;
+        }
+
+
+        .separator::before,
+        .separator::after {
+
+            content: "";
+
+            height: 1px;
+
+            background: #edf0f4;
+
+            flex: 1;
+        }
+
+
+        /* =========================
+           FORMULAIRE
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 17px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #152238;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid #dce2ea;
+
+            border-radius: 9px;
+
+            background: #fbfcfe;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            color: #172033;
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #d79500;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(215,149,0,0.10);
+        }
+
+
+        /* =========================
+           BOUTON NUMÉRO
+        ========================= */
+
+        .phone-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #082d59;
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .phone-button:hover {
+
+            background: #0d407b;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .phone-button:disabled,
+        .google-button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #message {
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
+            display: none;
+
+            text-align: center;
+        }
+
+
+        #message.success {
+
+            display: block;
+
+            background: #ecfdf3;
+
+            color: #087443;
+        }
+
+
+        #message.error {
+
+            display: block;
+
+            background: #fff1f2;
+
+            color: #be123c;
+        }
+
+
+        /* =========================
+           CONNEXION
+        ========================= */
+
+        .login-link {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #6c7788;
+
+            font-size: 12px;
+        }
+
+
+        .login-link a {
+
+            color: #b67800;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        .login-link a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header {
+
+                padding: 10px 5%;
+            }
+
+
+            .logo-icon {
+
+                width: 40px;
+                height: 40px;
+            }
+
+
+            .logo-text strong {
+
+                font-size: 15px;
+            }
+
+
+            .logo-text span {
+
+                font-size: 8px;
+            }
+
+
+            main {
+
+                padding:
+                    30px 15px;
+            }
+
+
+            .card {
+
+                padding: 23px 18px;
+
+                border-radius: 15px;
+            }
+
+
+            .title h1 {
+
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <div class="logo-icon">
+
+            <img
+                src="logo.png"
+                alt="Logo Bonjour Empire"
+            >
+
+        </div>
+
+
+        <div class="logo-text">
+
+            <strong>
+                BONJOUR EMPIRE
+            </strong>
+
+            <span>
+                CULTURE • TALENTS • AVENIR
+            </span>
+
+        </div>
+
+    </a>
+
+</header>
+
+
+<!-- =========================
+     CONTENU
+========================= -->
+
+<main>
+
+    <div class="card">
+
+
+        <div class="title">
+
+            <span class="badge">
+                ESPACE MEMBRE
+            </span>
+
+            <h1>
+                Créer un compte
+            </h1>
+
+            <p>
+                Rejoignez Bonjour Empire
+                et participez à notre communauté.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             GOOGLE
+        ========================= -->
+
+        <button
+            type="button"
+            class="google-button"
+            id="googleButton"
+        >
+
+            <i
+                class="fa-brands fa-google google-icon"
+            ></i>
+
+            Continuer avec Google
+
+        </button>
+
+
+        <!-- =========================
+             SEPARATEUR
+        ========================= -->
+
+        <div class="separator">
+
+            OU
+
+        </div>
+
+
+        <!-- =========================
+             INSCRIPTION NUMÉRO
+        ========================= -->
+
+        <form
+            id="phoneForm"
+        >
+
+
+            <div class="form-group">
+
+                <label for="nom">
+
+                    Nom complet
+
+                </label>
+
+                <input
+                    type="text"
+                    id="nom"
+                    placeholder="Votre nom complet"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="telephone">
+
+                    Numéro de téléphone
+
+                </label>
+
+                <input
+                    type="tel"
+                    id="telephone"
+                    placeholder="+243 8XX XXX XXX"
+                    autocomplete="tel"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="motDePasse">
+
+                    Mot de passe
+
+                </label>
+
+                <input
+                    type="password"
+                    id="motDePasse"
+                    placeholder="Minimum 6 caractères"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="confirmation">
+
+                    Confirmer le mot de passe
+
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmation"
+                    placeholder="Répétez le mot de passe"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="phone-button"
+                id="phoneButton"
+            >
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Créer mon compte
+
+            </button>
+
+
+        </form>
+
+
+        <!-- MESSAGE -->
+
+        <div id="message"></div>
+
+
+        <!-- CONNEXION -->
+
+        <div class="login-link">
+
+            Vous avez déjà un compte ?
+
+            <a href="connexion.html">
+
+                Se connecter
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+const SUPABASE_URL =
+    "https://ropbkswmihagfvhcfonb.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_gSMzK8B2ALsrkpNkAzWAaA_emr3j0GN";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function afficherMessage(
+    texte,
+    type
+) {
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+    message.textContent =
+        texte;
+
+    message.className =
+        type;
+
+}
+
+
+/* =========================
+   GOOGLE
+========================= */
+
+document
+    .getElementById("googleButton")
+    .addEventListener(
+        "click",
+        async function () {
+
+            const bouton =
+                this;
+
+            bouton.disabled =
+                true;
+
+            bouton.innerHTML =
+                "⏳ Connexion à Google...";
+
+
+            const { error } =
+                await supabaseClient.auth
+                    .signInWithOAuth({
+
+                        provider:
+                            "google",
+
+                        options: {
+
+                            redirectTo:
+                                window.location.origin +
+                                "/connexion.html"
+
+                        }
+
+                    });
+
+
+            if (error) {
+
+                console.error(
+                    error
+                );
+
+                afficherMessage(
+                    "❌ Impossible de continuer avec Google.",
+                    "error"
+                );
+
+                bouton.disabled =
+                    false;
+
+                bouton.innerHTML = `
+                    <i class="fa-brands fa-google google-icon"></i>
+                    Continuer avec Google
+                `;
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   INSCRIPTION NUMÉRO
+========================= */
+
+document
+    .getElementById("phoneForm")
+    .addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const nom =
+                document
+                    .getElementById("nom")
+                    .value
+                    .trim();
+
+
+            const telephone =
+                document
+                    .getElementById("telephone")
+                    .value
+                    .trim();
+
+
+            const motDePasse =
+                document
+                    .getElementById("motDePasse")
+                    .value;
+
+
+            const confirmation =
+                document
+                    .getElementById("confirmation")
+                    .value;
+
+
+            const bouton =
+                document
+                    .getElementById(
+                        "phoneButton"
+                    );
+
+
+            /* Vérification */
+
+            if (
+                motDePasse !==
+                confirmation
+            ) {
+
+                afficherMessage(
+                    "❌ Les deux mots de passe ne correspondent pas.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                motDePasse.length < 6
+            ) {
+
+                afficherMessage(
+                    "❌ Le mot de passe doit contenir au moins 6 caractères.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            bouton.disabled =
+                true;
+
+            bouton.innerHTML =
+                "⏳ Création du compte...";
+
+
+            /*
+             * IMPORTANT :
+             *
+             * Pour éviter le SMS,
+             * nous utilisons ici
+             * une adresse interne
+             * basée sur le numéro.
+             *
+             * Le numéro reste
+             * enregistré dans le profil.
+             */
+
+            const emailInterne =
+                telephone
+                    .replace(
+                        /\D/g,
+                        ""
+                    )
+                    + "@bonjourempire.local";
+
+
+            /* =========================
+               CRÉER LE COMPTE AUTH
+            ========================= */
+
+            const { data, error } =
+                await supabaseClient.auth
+                    .signUp({
+
+                        email:
+                            emailInterne,
+
+                        password:
+                            motDePasse,
+
+                        options: {
+
+                            data: {
+
+                                nom:
+                                    nom,
+
+                                telephone:
+                                    telephone
+
+                            }
+
+                        }
+
+                    });
+
+
+            if (error) {
+
+                console.error(
+                    error
+                );
+
+                afficherMessage(
+                    "❌ " +
+                    error.message,
+                    "error"
+                );
+
+                bouton.disabled =
+                    false;
+
+                bouton.innerHTML = `
+                    <i class="fa-solid fa-user-plus"></i>
+                    Créer mon compte
+                `;
+
+                return;
+
+            }
+
+
+            /* =========================
+               SUCCÈS
+            ========================= */
+
+            afficherMessage(
+                "🎉 Votre compte a été créé avec succès !",
+                "success"
+            );
+
+
+            document
+                .getElementById("phoneForm")
+                .reset();
+
+
+            bouton.disabled =
+                false;
+
+            bouton.innerHTML = `
+                <i class="fa-solid fa-user-plus"></i>
+                Créer mon compte
+            `;
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
