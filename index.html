@@ -1828,8 +1828,25 @@ nav a:hover::after {
 
 
 <body>
-
-<!-- HEADER -->
+<button id="installAppButton" style="
+display:none;
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+z-index:9999;
+border:none;
+background:#082d59;
+color:white;
+padding:13px 20px;
+border-radius:50px;
+font-size:14px;
+font-weight:700;
+cursor:pointer;
+box-shadow:0 8px 25px rgba(0,0,0,0.20);
+">
+📲 Installer l'application
+</button>
 
 <header>
 
@@ -2202,6 +2219,73 @@ if ("serviceWorker" in navigator) {
             });
     });
 }
+</script>
+    <script>
+
+let deferredPrompt = null;
+
+const installButton =
+    document.getElementById(
+        "installAppButton"
+    );
+
+
+window.addEventListener(
+    "beforeinstallprompt",
+    function(event) {
+
+        event.preventDefault();
+
+        deferredPrompt = event;
+
+        installButton.style.display =
+            "block";
+
+    }
+);
+
+
+installButton.addEventListener(
+    "click",
+    async function() {
+
+        if (!deferredPrompt) {
+            return;
+        }
+
+        deferredPrompt.prompt();
+
+        const result =
+            await deferredPrompt.userChoice;
+
+        console.log(
+            "Installation :",
+            result.outcome
+        );
+
+        deferredPrompt = null;
+
+        installButton.style.display =
+            "none";
+
+    }
+);
+
+
+window.addEventListener(
+    "appinstalled",
+    function() {
+
+        console.log(
+            "Bonjour Empire installé ✅"
+        );
+
+        installButton.style.display =
+            "none";
+
+    }
+);
+
 </script>
 </body>
 
