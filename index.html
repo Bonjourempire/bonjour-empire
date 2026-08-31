@@ -2186,6 +2186,23 @@ navigationLinks.forEach(
 
 <script src="js/activite.js"></script>
     <script src="ia/assistant.js"></script>
+    <script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker
+            .register("/bonjour-empire/service-worker.js")
+            .then(function () {
+                console.log("Bonjour Empire PWA activée ✅");
+            })
+            .catch(function (error) {
+                console.error(
+                    "Erreur Service Worker :",
+                    error
+                );
+            });
+    });
+}
+</script>
 </body>
 
 </html>
