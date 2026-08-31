@@ -1,0 +1,20 @@
+{
+  "name": "Bonjour Empire",
+  "short_name": "Bonjour Empire",
+  "description": "Culture • Talents • Avenir",
+  "start_url": "/bonjour-empire/",
+  "scope": "/bonjour-empire/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#082d59",
+  "orientation": "portrait",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
